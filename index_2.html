@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>카자흐스탄 · 키르기스스탄 여행 리포트 | 2026.09.03 – 09.12</title>
+<style>
+:root{
+  --bg:#FAFAFB;
+  --surface:#FFFFFF;
+  --border:#ECECF1;
+  --ink:#18181B;
+  --ink-2:#52525B;
+  --ink-3:#8E8E97;
+  --accent:#8B7CF6;
+  --accent-soft:#F1EEFE;
+  --red:#F87171;      --red-bg:#FEF1F1;
+  --amber:#F59E0B;    --amber-bg:#FEF7EC;
+  --blue:#60A5FA;     --blue-bg:#EFF6FF;
+  --green:#34D399;    --green-bg:#ECFDF5;
+  --gray:#9CA3AF;     --gray-bg:#F4F4F6;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Pretendard','Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  background:var(--bg);color:var(--ink);
+  line-height:1.6;font-size:15px;
+  -webkit-font-smoothing:antialiased;
+}
+.container{max-width:1200px;margin:0 auto;padding:0 24px 96px}
+
+/* ---------- header ---------- */
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:56px 24px 40px}
+.head-in{max-width:1200px;margin:0 auto}
+.eyebrow{
+  display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;
+  color:var(--accent);background:var(--accent-soft);
+  padding:6px 14px;border-radius:999px;margin-bottom:20px;
+}
+h1{font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:16px}
+h1 .sub{color:var(--ink-3);font-weight:600}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px 32px;color:var(--ink-2);font-size:14px;margin-top:20px}
+.meta-row b{color:var(--ink);font-weight:700}
+.route{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:24px}
+.route span.node{
+  background:var(--bg);border:1px solid var(--border);border-radius:10px;
+  padding:6px 14px;font-size:13px;font-weight:600;
+}
+.route span.sep{color:var(--ink-3);font-size:12px}
+
+/* ---------- nav ---------- */
+nav{
+  position:sticky;top:0;z-index:20;background:rgba(250,250,251,.92);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--border);
+}
+.nav-in{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;gap:4px;overflow-x:auto}
+nav a{
+  padding:14px 14px;font-size:13.5px;font-weight:600;color:var(--ink-3);
+  text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;
+}
+nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* ---------- section ---------- */
+section{margin-top:64px;scroll-margin-top:60px}
+.sec-title{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.sec-title h2{font-size:24px;font-weight:800;letter-spacing:-.02em}
+.sec-num{
+  width:26px;height:26px;border-radius:8px;background:var(--accent-soft);color:var(--accent);
+  font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;
+}
+.sec-desc{color:var(--ink-2);font-size:14px;margin-bottom:24px}
+
+/* ---------- cards ---------- */
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:24px;
+}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+/* ---------- KPI ---------- */
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px}
+.kpi .label{font-size:12.5px;color:var(--ink-3);font-weight:600;margin-bottom:8px}
+.kpi .val{font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.kpi .val .unit{font-size:15px;font-weight:700;color:var(--ink-2);margin-left:3px}
+.kpi .note{font-size:12.5px;color:var(--ink-3);margin-top:6px}
+
+/* ---------- summary ---------- */
+.summary{
+  background:var(--accent-soft);border:1px solid #E4DEFC;border-radius:20px;
+  padding:26px 28px;margin-bottom:20px;
+}
+.summary p{font-size:15px;color:#3F3468;line-height:1.75}
+.summary p + p{margin-top:12px}
+.summary b{font-weight:700;color:#2E2551}
+
+/* ---------- badges ---------- */
+.badge{
+  display:inline-flex;align-items:center;font-size:11.5px;font-weight:700;
+  padding:4px 10px;border-radius:999px;letter-spacing:.01em;
+}
+.b-done{background:var(--green-bg);color:#059669}
+.b-todo{background:var(--amber-bg);color:#B45309}
+.b-crit{background:var(--red-bg);color:#DC2626}
+.b-info{background:var(--blue-bg);color:#2563EB}
+.b-low{background:var(--gray-bg);color:#6B7280}
+.b-acc{background:var(--accent-soft);color:#6D5BD0;border:1px solid #DDD5FB}
+
+/* ---------- timeline ---------- */
+.day{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  padding:24px;margin-bottom:14px;
+}
+.day-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:6px}
+.day-tag{
+  font-size:12px;font-weight:800;color:var(--accent);background:var(--accent-soft);
+  padding:5px 12px;border-radius:8px;
+}
+.day-tag.kg{color:#C2410C;background:#FFF4ED}
+.day-date{font-size:13px;color:var(--ink-3);font-weight:600}
+.day-title{font-size:17px;font-weight:800;letter-spacing:-.02em;margin:6px 0 16px}
+.sched{width:100%;border-collapse:collapse}
+.sched td{padding:10px 0;vertical-align:top;font-size:14px;border-top:1px solid var(--border)}
+.sched tr:first-child td{border-top:none}
+.sched .t{
+  width:110px;padding-right:16px;white-space:nowrap;
+  font-size:12.5px;font-weight:700;color:var(--accent);
+}
+.day.kg .sched .t{color:#C2410C}
+.sub-note{display:block;font-size:12.5px;color:var(--ink-3);margin-top:5px;line-height:1.6}
+.stay{
+  margin-top:16px;padding:12px 16px;background:var(--bg);border-radius:12px;
+  font-size:13px;color:var(--ink-2);
+}
+.stay b{color:var(--ink);font-weight:700}
+
+/* ---------- table ---------- */
+table.data{width:100%;border-collapse:collapse;font-size:14px}
+table.data th{
+  text-align:left;padding:12px 14px;font-size:12px;font-weight:700;color:var(--ink-3);
+  background:var(--bg);border-bottom:1px solid var(--border);
+}
+table.data th:first-child{border-radius:12px 0 0 0}
+table.data th:last-child{border-radius:0 12px 0 0}
+table.data td{padding:13px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+table.data tr:last-child td{border-bottom:none}
+table.data b{font-weight:700}
+.wrap-table{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+
+/* ---------- list ---------- */
+.card h3{
+  font-size:15.5px;font-weight:800;letter-spacing:-.01em;margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.card h3 .ic{
+  width:24px;height:24px;border-radius:7px;background:var(--accent-soft);
+  display:flex;align-items:center;justify-content:center;font-size:12px;flex:none;
+}
+ul.list{list-style:none}
+ul.list li{position:relative;padding:9px 0 9px 18px;font-size:14px;border-top:1px solid var(--border)}
+ul.list li:first-child{border-top:none;padding-top:0}
+ul.list li::before{
+  content:"";position:absolute;left:0;top:17px;width:5px;height:5px;
+  border-radius:50%;background:var(--accent);
+}
+ul.list li:first-child::before{top:8px}
+ul.list li b{font-weight:700}
+
+/* ---------- alert ---------- */
+.alert{border-radius:16px;padding:20px 22px;margin-top:16px;font-size:14px}
+.alert h4{font-size:14.5px;font-weight:800;margin-bottom:10px}
+.alert ul{list-style:none}
+.alert li{padding:5px 0 5px 16px;position:relative;line-height:1.6}
+.alert li::before{content:"";position:absolute;left:0;top:13px;width:4px;height:4px;border-radius:50%}
+.a-warn{background:var(--amber-bg);border:1px solid #F7E4C3}
+.a-warn h4{color:#B45309}
+.a-warn li::before{background:var(--amber)}
+.a-crit{background:var(--red-bg);border:1px solid #FADCDC}
+.a-crit h4{color:#DC2626}
+.a-crit li::before{background:var(--red)}
+.a-info{background:var(--blue-bg);border:1px solid #D8E8FE}
+.a-info h4{color:#2563EB}
+.a-info li::before{background:var(--blue)}
+
+/* ---------- footer ---------- */
+footer{
+  margin-top:80px;padding-top:28px;border-top:1px solid var(--border);
+  text-align:center;color:var(--ink-3);font-size:13px;
+}
+footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
+
+@media(max-width:640px){
+  body{font-size:14.5px}
+  h1{font-size:27px;letter-spacing:-.02em}
+  .container{padding:0 14px 64px}
+  header{padding:32px 14px 24px}
+  .eyebrow{font-size:11px;margin-bottom:14px}
+  .meta-row{gap:6px 18px;font-size:13px;margin-top:16px}
+  .route{gap:6px;margin-top:18px}
+  .route span.node{padding:5px 10px;font-size:12px}
+
+  /* nav — 가로 스크롤, 스크롤바 숨김 */
+  .nav-in{padding:0 14px;-ms-overflow-style:none;scrollbar-width:none}
+  .nav-in::-webkit-scrollbar{display:none}
+  nav a{padding:12px 10px;font-size:13px}
+
+  section{margin-top:44px}
+  .sec-title h2{font-size:20px}
+  .card,.kpi,.day{padding:18px;border-radius:16px}
+  .summary{padding:20px;border-radius:16px}
+  .summary p{font-size:14.5px}
+  .kpi .val{font-size:26px}
+
+  /* 일정 테이블 — 시간을 위로 올려 2줄 구성 */
+  .sched .t{
+    display:block;width:auto;padding:0 0 4px 0;
+    font-size:12px;letter-spacing:.02em;
+  }
+  .sched td{display:block;border-top:none;padding:0}
+  .sched tr{display:block;padding:12px 0;border-top:1px solid var(--border)}
+  .sched tr:first-child{border-top:none;padding-top:0}
+
+  /* 데이터 테이블 — 행을 카드처럼 스택 */
+  .wrap-table{border:none;background:transparent;border-radius:0}
+  table.data{display:block}
+  table.data tr{
+    display:block;background:var(--surface);border:1px solid var(--border);
+    border-radius:16px;padding:16px;margin-bottom:10px;
+  }
+  table.data tr:first-child{display:none}      /* 헤더 행 숨김 */
+  table.data td{
+    display:block;border-bottom:none;padding:0;
+  }
+  table.data td + td{margin-top:8px}
+  table.data td[data-label]::before{
+    content:attr(data-label);display:block;
+    font-size:11px;font-weight:700;color:var(--ink-3);
+    letter-spacing:.03em;margin-bottom:3px;
+  }
+
+  .alert{padding:16px 18px;border-radius:14px}
+  .sub-note{font-size:12px}
+  footer{margin-top:56px}
+}
+@media(max-width:380px){
+  h1{font-size:24px}
+  .kpi .val{font-size:23px}
+}
+@media print{
+  nav{display:none}
+  .day,.card,.kpi{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <span class="eyebrow">TRAVEL PLAN REPORT · v1.0</span>
+    <h1>카자흐스탄 · 키르기스스탄<br><span class="sub">우리 둘의 힐링 여행</span></h1>
+    <div class="meta-row">
+      <span>기간 <b>2026.09.03 (목) – 09.12 (토)</b></span>
+      <span>일정 <b>9박 10일</b></span>
+      <span>인원 <b>2인</b></span>
+      <span>생성일 <b>2026.07.23</b></span>
+    </div>
+    <div class="route">
+      <span class="node">인천</span><span class="sep">✈</span>
+      <span class="node">알마티</span><span class="sep">✈</span>
+      <span class="node">비슈케크</span><span class="sep">🚙</span>
+      <span class="node">이식쿨 토소르</span><span class="sep">✈</span>
+      <span class="node">침블락 3,200m</span><span class="sep">✈</span>
+      <span class="node">인천</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-in">
+    <a href="#summary">요약</a>
+    <a href="#status">준비 현황</a>
+    <a href="#itinerary">일정</a>
+    <a href="#driving">운전</a>
+    <a href="#tenir">테니르 이동</a>
+    <a href="#prep">준비물</a>
+    <a href="#money">환전</a>
+    <a href="#places">명소</a>
+    <a href="#food">미식</a>
+    <a href="#shopping">쇼핑</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ============ SUMMARY ============ -->
+<section id="summary">
+  <div class="sec-title"><span class="sec-num">01</span><h2>Executive Summary</h2></div>
+  <p class="sec-desc">여행 전체 구조와 핵심 지표 요약</p>
+
+  <div class="summary">
+    <p>중앙아시아 <b>2개국 9박 10일 자유여행</b>. 도시(비슈케크·알마티) → 호수와 별(이식쿨 남안) → 만년설 위 사우나(3,200m) → 도시 미식으로 이어지는 대비가 뚜렷한 구성이다.</p>
+    <p>설계의 핵심은 <b>연박 중심 구조</b>다. 9박 동안 숙소는 4곳뿐이고, 직접 운전은 이틀로 최소화했다. 유명 스팟을 욱여넣는 대신 휴식 리듬에 배팅한 <b>"힐링형" 일정</b>이다.</p>
+    <p>남은 리스크는 <b>Day 6 고도 순응</b> 하나로 좁혀졌다. 일정 문제가 아닌 당일 컨디션 관리 이슈이며, 도착일 트레킹·음주를 가볍게 유지하면 해소된다.</p>
+  </div>
+
+  <div class="grid g4">
+    <div class="kpi">
+      <div class="label">총 일정</div>
+      <div class="val">9<span class="unit">박 10일</span></div>
+      <div class="note">2026.09.03 – 09.12</div>
+    </div>
+    <div class="kpi">
+      <div class="label">숙소 수</div>
+      <div class="val">4<span class="unit">곳</span></div>
+      <div class="note">연박 3회로 이동 피로 최소화</div>
+    </div>
+    <div class="kpi">
+      <div class="label">자가운전</div>
+      <div class="val">2<span class="unit">일</span></div>
+      <div class="note">편도 약 4~5시간 × 2</div>
+    </div>
+    <div class="kpi">
+      <div class="label">최고 고도</div>
+      <div class="val">3,200<span class="unit">m</span></div>
+      <div class="note">탈가르 패스 2박</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATUS ============ -->
+<section id="status">
+  <div class="sec-title"><span class="sec-num">02</span><h2>준비 현황 &amp; 남은 액션</h2></div>
+  <p class="sec-desc">확정된 항목과 출발 전 처리할 작업</p>
+
+  <div class="wrap-table">
+    <table class="data">
+      <tr>
+        <th style="width:130px">상태</th>
+        <th style="width:190px">항목</th>
+        <th>내용</th>
+      </tr>
+      <tr>
+        <td data-label="상태"><span class="badge b-done">확정</span></td>
+        <td data-label="항목"><b>호텔 짐 보관</b></td>
+        <td data-label="내용">Kazakhstan Hotel 3건 <b>무료</b> 확정 — 9/4→9/7, 9/8→9/10, 9/11 당일(19시까지)</td>
+      </tr>
+      <tr>
+        <td data-label="상태"><span class="badge b-done">확정</span></td>
+        <td data-label="항목"><b>테니르 케이블카</b></td>
+        <td data-label="내용">Premium 요금제에 <b>왕복 티켓 포함</b> · 도착 전날 슈퍼바이저가 전자티켓 발송</td>
+      </tr>
+      <tr>
+        <td data-label="상태"><span class="badge b-done">확정</span></td>
+        <td data-label="항목"><b>렌터카</b></td>
+        <td data-label="내용"><b>GAC GS3</b>(1.5T 터보, 자동, 5인승, 무제한 주행) · 9/5 10:00 Orien Hotel 배달(20 USD) → 9/7 13:30 마나스 공항 반납(60 USD)<span class="sub-note">예약번호 1400827886613371 · 바우처 49 · 렌트비 300 USD(카드 가능)</span></td>
+      </tr>
+      <tr>
+        <td data-label="상태"><span class="badge b-done">확정</span></td>
+        <td data-label="항목"><b>렌터카 보증금</b></td>
+        <td data-label="내용"><b>300 USD 현금</b> — 반납 후 현금 환급 · 인수 시 총 600 USD(렌트비 300 카드 가능 + 보증금 300 현금)<span class="sub-note">업체가 600 USD 안내 후 300 USD로 정정 — Trip.com 확정서와 일치</span></td>
+      </tr>
+      <tr>
+        <td data-label="상태"><span class="badge b-todo">확인 필요</span></td>
+        <td data-label="항목"><b>계약 반영 여부</b></td>
+        <td data-label="내용">확정서에 여전히 "9/4 16:00 Sky Plaza 사무실 인수·반납"으로 표기 — <b>호텔 배달·공항 반납이 계약에 등록됐는지 재확인</b></td>
+      </tr>
+      <tr>
+        <td data-label="상태"><span class="badge b-todo">확인 필요</span></td>
+        <td data-label="항목"><b>서류 전송</b></td>
+        <td data-label="내용">렌트 전 여권 · 한국 면허(앞뒤) · 국제운전면허 사본 업체 전송 + 호텔 구글맵 핀</td>
+      </tr>
+      <tr>
+        <td data-label="상태"><span class="badge b-crit">필수</span></td>
+        <td data-label="항목"><b>반납 조건</b></td>
+        <td data-label="내용"><b>외부 세차 + 실내 진공청소 + 연료 만탱크</b> — Day 5 공항 도착 전 50분 확보<span class="sub-note">미이행 시 보증금 일시 보류 + 청소비 2,500솜 차감 후 <b>후일 환급</b> → 공항 현장 현금 환급 불가. 세차장은 2GIS "автомойка" 검색(300~500솜)</span></td>
+      </tr>
+      <tr>
+        <td data-label="상태"><span class="badge b-todo">확인 필요</span></td>
+        <td data-label="항목"><b>SNEG 디너</b></td>
+        <td data-label="내용">Day 7 저녁 특별 케이블카(18:30/20:30) 운행 여부 — 슈퍼바이저 연락 시 확인</td>
+      </tr>
+      <tr>
+        <td data-label="상태"><span class="badge b-todo">확인 필요</span></td>
+        <td data-label="항목"><b>숙소 주방</b></td>
+        <td data-label="내용">토소르 에어비앤비 <b>주방 · 망갈(화로)</b> 유무 — 셀프 쿠킹 메뉴 결정에 필요</td>
+      </tr>
+      <tr>
+        <td data-label="상태"><span class="badge b-crit">필수</span></td>
+        <td data-label="항목"><b>국제운전면허증</b></td>
+        <td data-label="내용">미발급 시 렌트·운전 불가 — 1968 비엔나 협약식, 경찰서·면허시험장 당일 발급</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="alert a-info">
+    <h4>출발 전 타임라인</h4>
+    <ul>
+      <li><b>D-30~7</b> — 국제운전면허 발급 · 여권 유효기간(6개월+) · 여행자보험(고산 트레킹 포함)</li>
+      <li><b>D-14~7</b> — 달러 $600 환전(신권 $100권) · 트래블카드 KZT 지원 확인 · eSIM 구매</li>
+      <li><b>D-7~3</b> — 앱 설치(2GIS · Yandex Go · 러시아어 오프라인 번역) · 구글맵 오프라인 저장 · 숙소 호스트 문의</li>
+      <li><b>D-3~1</b> — 예약 확인서 저장(항공 3건 · 숙소 4곳 · 렌터카) · 사본 촬영 · 긴급번호 저장</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ ITINERARY ============ -->
+<section id="itinerary">
+  <div class="sec-title"><span class="sec-num">03</span><h2>일자별 일정</h2></div>
+  <p class="sec-desc">
+    <span class="badge b-acc">시차</span> 카자흐 한국−4h · 키르기스 한국−3h (두 나라 간 1시간 차) &nbsp;
+    <span class="badge b-acc">일출·일몰</span> 알마티 05:30/18:10 · 비슈케크 06:30/19:25 · 이식쿨 06:25/19:15
+  </p>
+
+  <div class="day">
+    <div class="day-head"><span class="day-tag">DAY 1</span><span class="day-date">9/3 (목)</span><span class="badge b-low">인천 → 알마티</span></div>
+    <div class="day-title">중앙아시아로 출발</div>
+    <table class="sched">
+      <tr><td class="t">18:10</td><td>인천공항 출발 (비행 약 6시간 40분)</td></tr>
+      <tr><td class="t">20:50</td><td>알마티 공항 도착 · 입국 수속 (한국인 무비자)</td></tr>
+    </table>
+    <div class="stay">🛏 <b>Kazakhstan Hotel</b> — 알마티</div>
+  </div>
+
+  <div class="day kg">
+    <div class="day-head"><span class="day-tag kg">DAY 2</span><span class="day-date">9/4 (금)</span><span class="badge b-low">알마티 → 비슈케크</span></div>
+    <div class="day-title">비슈케크 입성, NAVAT에서 첫 만찬</div>
+    <table class="sched">
+      <tr><td class="t">오전</td><td>늦잠 &amp; 호텔 조식 → 알마티 시내 산책, 카페 타임</td></tr>
+      <tr><td class="t">13:30</td><td>알마티 공항으로 이동</td></tr>
+      <tr><td class="t">15:55–16:50</td><td>알마티 ✈ 비슈케크 마나스 공항<span class="sub-note">도착 후 시계 1시간 앞으로 (키르기스스탄 UTC+6)</span></td></tr>
+      <tr><td class="t">도착 후</td><td>입국장 <b>Manas / Super Taxi 공식 데스크</b> 이용 — 요금 사전 확정(약 500~1,000솜)</td></tr>
+      <tr><td class="t">저녁</td><td>호텔 체크인 후 도보로 <b>Чайхана NAVAT</b> 술탄 이브라이모프점 (12:00~24:00)<span class="sub-note">렌터카는 내일 아침 수령이라 반주 자유 🍺 · 추천 주문 — ① 탄디르 레표시카 + 아치추축 샐러드 ② 플롭(시그니처) ③ 베쉬바르막 또는 만티 ④ 양고기 샤슬릭 2꼬치 ⑤ 아르파(Arpa) 생맥주</span></td></tr>
+    </table>
+    <div class="stay">🛏 <b>Orien Hotel (5성급)</b> — 비슈케크</div>
+  </div>
+
+  <div class="day kg">
+    <div class="day-head"><span class="day-tag kg">DAY 3</span><span class="day-date">9/5 (토)</span><span class="badge b-info">운전일 · 4~5시간</span><span class="badge b-done">렌터카 수령 확정</span></div>
+    <div class="day-title">호수를 향한 드라이브 &amp; 동화 협곡</div>
+    <table class="sched">
+      <tr><td class="t">아침</td><td>호텔 조식 · 체크아웃 준비</td></tr>
+      <tr><td class="t">10:00</td><td><b>Orien Hotel로 렌터카(GAC GS3) 배달 수령</b> — 배달료 20 USD / 1,700솜<span class="sub-note">💳 렌트비 300 USD(카드 가능) · 💵 <b>보증금 300 USD 현금</b>(반납 시 환급) — 인수 시 총 600 USD<br>차량 상태 공동 점검(업체 + 본인 각각 사진·영상) · 여권 · 한국 면허 · 국제운전면허 지참 · <b>연료 만탱크·청결 상태 확인</b> · 스페어타이어 · 잭 · 삼각대 위치 확인</span></td></tr>
+      <tr><td class="t">10:30</td><td>이식쿨 남안(Tosor) 방면 출발<span class="sub-note">🛍 출발길 Globus 마켓 정차 — 앗바쉬 화이트 허니 + 2박 장보기 → 경유지 보콘바에보 펠트 공방(선택)</span></td></tr>
+      <tr><td class="t">13:30</td><td>점심 — <b>벨탐 유르트 캠프</b>(보콘바에보 15분, 호숫가 가정식·사전 연락 권장) 또는 보콘바에보 시내 카페</td></tr>
+      <tr><td class="t">16:00~</td><td><b>스카즈카 캐니언(동화 협곡)</b> 트레킹<span class="sub-note">입장 1인 50솜 · 늦은 오후 빛이 가장 아름다움 · 토소르에서 8km</span></td></tr>
+      <tr><td class="t">18:00</td><td>토소르 숙소 도착 · 저녁 <b>셀프 쿠킹</b> 🍳<span class="sub-note">펠메니 + 스메타나 또는 망갈 샤슬릭, 아치추축 샐러드, 제철 멜론</span></td></tr>
+    </table>
+    <div class="stay">🛏 <b>Airbnb 게스트 스위트</b> — Tosor, 이식쿨 남안</div>
+  </div>
+
+  <div class="day kg">
+    <div class="day-head"><span class="day-tag kg">DAY 4</span><span class="day-date">9/6 (일)</span><span class="badge b-low">이식쿨 연박</span></div>
+    <div class="day-title">람사르 습지의 맑은 호수, 폭포, 그리고 별</div>
+    <table class="sched">
+      <tr><td class="t">오전</td><td>조식 후 여유</td></tr>
+      <tr><td class="t">전일</td><td><b>바르스콘 폭포</b> 트레킹 · 이식쿨 호숫가 산책<span class="sub-note">유리 가가린이 휴양 왔던 계곡 — 초입에 기념비</span></td></tr>
+      <tr><td class="t">저녁</td><td>쏟아지는 별을 보며 키르기스스탄 마지막 밤 🌌<span class="sub-note">일몰 19:15 → 완전한 어둠 20:40 이후 · 별·은하수 관측은 21시부터가 최적</span></td></tr>
+    </table>
+    <div class="stay">🛏 <b>Airbnb 게스트 스위트</b> — Tosor (연박)</div>
+  </div>
+
+  <div class="day">
+    <div class="day-head"><span class="day-tag">DAY 5</span><span class="day-date">9/7 (월)</span><span class="badge b-info">운전일 · 공항 반납</span></div>
+    <div class="day-title">알마티 귀환</div>
+    <table class="sched">
+      <tr><td class="t">07:00~07:30</td><td>간단히 조식 후 마나스 공항으로 출발 — 여유 버퍼 확보<span class="sub-note">이식쿨 일출 06:25 — 출발 시각엔 이미 환해서 야간 운전 걱정 없음</span></td></tr>
+      <tr><td class="t">12:00~12:50</td><td><b>🚿 세차(외부 + 실내 진공) + ⛽ 주유 만땅</b> — 비슈케크 외곽 또는 공항 가는 길<span class="sub-note">2GIS에서 <b>"автомойка"</b> 검색 · 비용 약 300~500솜 · 소요 30~45분<br>⚠️ <b>반드시 직접 세차할 것</b> — 더러운 채 반납하면 정비사가 세차·검수를 마칠 때까지 보증금이 <b>일시 보류</b>되고, 청소비 2,500솜 차감 후 경리부서를 통해 <b>나중에</b> 환급됨 (공항 현장 현금 환급 불가)</span></td></tr>
+      <tr><td class="t">13:30</td><td>마나스 공항 도착 · <b>렌터카 공항 반납</b> (반납 서비스 60 USD / 5,220솜)<span class="sub-note">💵 보증금 300 USD 현금 환급 확인 · 반납 시 차량 상태 사진 촬영</span></td></tr>
+      <tr><td class="t">15:30–16:25</td><td>에어아스타나 직항 ✈ 알마티<span class="sub-note">도착 후 시계 1시간 뒤로 (카자흐스탄 시간)</span></td></tr>
+      <tr><td class="t">저녁</td><td>알마티 중심가 체크인 → 시내 산책 &amp; 저녁<span class="sub-note">📱 테니르 슈퍼바이저 연락 예정 — 전자 케이블카 티켓 수신 + SNEG 디너 확인<br>💰 보증금용 현금 50,000텡게 인출 · 🛒 Magnum Express(도스틱 42)에서 테니르용 장보기</span></td></tr>
+    </table>
+    <div class="stay">🛏 <b>Kazakhstan Hotel</b> — 알마티</div>
+  </div>
+
+  <div class="day">
+    <div class="day-head"><span class="day-tag">DAY 6</span><span class="day-date">9/8 (화)</span><span class="badge b-crit">해발 3,200m</span></div>
+    <div class="day-title">만년설 위에서의 하룻밤</div>
+    <table class="sched">
+      <tr><td class="t">09:00</td><td>Yandex Go로 <b>메데우 곤돌라 정류장</b> 이동 (약 30분)<span class="sub-note">💡 큰 캐리어는 호텔 보관(Day 8 재체크인) — 2박용 배낭만 가볍게<br>📞 리셉션 +7 727 291 91 01 · WhatsApp +7 775 069 34 67</span></td></tr>
+      <tr><td class="t">10:00</td><td><b>전자 티켓</b>으로 케이블카 등정 — 메데우 → 침블락 → Combi-1 → Combi-2<span class="sub-note">💰 보증금 50,000텡게 현금 지참 (체크아웃 시 환불)</span></td></tr>
+      <tr><td class="t">11:00</td><td><b>탈가르 패스(3,200m) 도착</b> — 짐은 테니르 리셉션에 맡기기</td></tr>
+      <tr><td class="t">12:00</td><td><b>Shymbulak Yurt 3200</b>에서 중앙아시아식 점심</td></tr>
+      <tr><td class="t">오후</td><td>전망 능선 <b>가벼운 산책</b> (도착 첫날은 고도 적응 우선 — 무리 금지)</td></tr>
+      <tr><td class="t">15:30</td><td>테니르 에코 호텔 체크인</td></tr>
+      <tr><td class="t">저녁</td><td>프라이빗 사우나 → <b>호텔 레스토랑/Oblaka</b> 저녁 (21시 마감)<span class="sub-note">일몰 18:10 — 골든아워 17:30~18:10에 사우나 맞추면 최고</span></td></tr>
+    </table>
+    <div class="stay">🛏 <b>Tenir Eco Hotel</b> — 탈가르 패스 3,200m</div>
+  </div>
+
+  <div class="day">
+    <div class="day-head"><span class="day-tag">DAY 7</span><span class="day-date">9/9 (수)</span><span class="badge b-low">침블락 연박</span></div>
+    <div class="day-title">빙하 트레킹과 산 위의 휴식</div>
+    <table class="sched">
+      <tr><td class="t">오전</td><td>일출 감상 (<b>약 05:30 — 알람 필수</b>) → 산장 레스토랑 조식</td></tr>
+      <tr><td class="t">오후</td><td>투윅수 빙하 방면 <b>본격 트레킹</b> 또는 좌탈가르 리프트 · 점심은 산장 레스토랑 또는 Bar 3200</td></tr>
+      <tr><td class="t">낮~</td><td>테라스 휴식 · <b>Syn 32</b> 티타임(핫초콜릿·블루베리 민트차) · 호텔 액티비티</td></tr>
+      <tr><td class="t">저녁</td><td>프라이빗 사우나 → <b>SNEG(Le Mont) 디너</b> 🍷<span class="sub-note">투숙객 전용 케이블카(약 18:30 하행 / 20:30 상행) — 운행 여부 사전 확인</span></td></tr>
+    </table>
+    <div class="stay">🛏 <b>Tenir Eco Hotel</b> — 연박</div>
+  </div>
+
+  <div class="day">
+    <div class="day-head"><span class="day-tag">DAY 8</span><span class="day-date">9/10 (목)</span><span class="badge b-low">알마티 시내</span></div>
+    <div class="day-title">하산, 도심 산책과 파인다이닝</div>
+    <table class="sched">
+      <tr><td class="t">오전</td><td>산장 조식 후 <b>11:00까지 체크아웃</b> → 케이블카 하산 → 알마티 숙소 재체크인 (보증금 5만 텡게 환불 확인)</td></tr>
+      <tr><td class="t">낮</td><td>아르바트(지벡 졸리) 거리 산책 · 카페 · <b>라하트 초콜릿 본점</b> 쇼핑</td></tr>
+      <tr><td class="t">19:00</td><td>산 중턱 파인다이닝 <b>Auyl</b> 저녁<span class="sub-note">알마티 일몰 18:10 — 노을 뷰를 원하면 18시 예약 추천 · Arba 와인 시음 기회</span></td></tr>
+      <tr><td class="t">21:00</td><td>시내 복귀 → <b>콕토베 야경</b></td></tr>
+    </table>
+    <div class="stay">🛏 <b>Kazakhstan Hotel</b> — 알마티</div>
+  </div>
+
+  <div class="day">
+    <div class="day-head"><span class="day-tag">DAY 9</span><span class="day-date">9/11 (금)</span><span class="badge b-low">알마티 → 인천</span></div>
+    <div class="day-title">알마티의 미식과 아쉬운 출국</div>
+    <table class="sched">
+      <tr><td class="t">12:00</td><td>체크아웃 (짐은 호텔 보관 — 19시까지)</td></tr>
+      <tr><td class="t">낮</td><td>판필로프 공원 · 젠코브 성당 · <b>젤료니 바자르</b><span class="sub-note">🛍 견과·건과일(건조품만 반입 가능) + Arba Wine·꼬냑 구매 마무리 — 면세한도 1인 2병</span></td></tr>
+      <tr><td class="t">19:00</td><td>공항 이동 &amp; 라운지 휴식<span class="sub-note">🥃 면세점 카자흐 제품 코너에서 Bacchus 꼬냑 구매(기내 반입 — 파손 걱정 없음)</span></td></tr>
+      <tr><td class="t">22:10</td><td>알마티 ✈ 인천 출발 (비행 약 5시간 20분)</td></tr>
+    </table>
+  </div>
+
+  <div class="day">
+    <div class="day-head"><span class="day-tag">DAY 10</span><span class="day-date">9/12 (토)</span><span class="badge b-low">인천 도착</span></div>
+    <table class="sched">
+      <tr><td class="t">07:30</td><td>인천공항 도착 — 여행 끝! 수고했어요 ✈️🏠</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ DRIVING ============ -->
+<section id="driving">
+  <div class="sec-title"><span class="sec-num">04</span><h2>키르기스스탄 운전 가이드</h2></div>
+  <p class="sec-desc">Day 3 비슈케크 → 토소르, Day 5 토소르 → 마나스 공항 · 편도 약 4~5시간 × 2일 · 우측통행 좌핸들(한국과 동일)</p>
+
+  <div class="alert a-crit">
+    <h4>핵심 요약 — 이것만은 꼭</h4>
+    <ul>
+      <li>속도: 마을·시내 <b>60</b> / 특별구역 <b>40</b> / 시외 국도 <b>90km/h</b> — 마을 표지판 보이면 자동 60으로 감속</li>
+      <li>혈중알코올 <b>0.00% 무관용</b> · <b>적신호 우회전 금지</b> · 시외에선 낮에도 <b>전조등 상시 점등</b></li>
+      <li>횡단보도 보행자 절대 우선 — 발 내딛는 순간 정지(경찰 단속 포인트)</li>
+      <li>야간 운전 금지 원칙 — 두 이동일 모두 오전 출발로 여유 확보 · 긴급전화 <b>112</b></li>
+    </ul>
+  </div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card">
+      <h3><span class="ic">📋</span>기본 규칙</h3>
+      <ul class="list">
+        <li><b>국제운전면허증 + 한국 면허 + 여권</b> 3종 항상 휴대 — 외국 면허 최대 90일 유효</li>
+        <li><b>음주운전 무관용</b> — 소량도 벌금·면허 압수·구금, 2026년 처벌 강화</li>
+        <li>전 좌석 안전벨트 · 운전 중 <b>휴대폰 손에 들기 금지</b>(거치대만 허용)</li>
+        <li><b>제3자 배상 보험 의무</b> — 렌트 계약 포함 여부 확인</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ic">🚦</span>속도 · 신호 규칙</h3>
+      <ul class="list">
+        <li>과속 단속은 통상 <b>10km/h 버퍼</b> — 비슈케크 시내 무인 카메라 다수</li>
+        <li><b>적신호 우회전 금지</b> — 한국과 달라 주의</li>
+        <li><b>시외 주간에도 전조등 점등 의무</b></li>
+        <li>속도위반 단속 시 경찰이 <b>영상 증거</b> 제시해야 함 · 벌금 약 1,000~3,000솜</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ic">🛣</span>도로 환경 (비슈케크–이식쿨)</h3>
+      <ul class="list">
+        <li><b>통행료 없음</b> — 간선 전 구간 무료 국도</li>
+        <li><b>2026년 공사 주의</b> — 발릭치–보콘바에보–카라콜 재포장 중, 출발 전 2GIS 확인</li>
+        <li><b>가축 주의</b> — 양떼·말·소 도로 횡단 수시, 마을 구간 감속</li>
+        <li>포트홀·비포장 접속부 있음 · 추월 과감한 현지 문화 — 방어운전</li>
+        <li>렌트사 <b>오프로드 금지 규정</b> 확인 — 위반 시 파손 전액 자부담</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ic">⛽</span>주유 · 검문 대응</h3>
+      <ul class="list">
+        <li>연료 92/95 옥탄 · 도시 벗어나면 <b>게이지 절반 이하면 무조건 주유</b>(현금 준비)</li>
+        <li>검문 시 우측 정차 → 서류 제시 · <b>묻는 것에만 차분히 답변</b></li>
+        <li>위반 시 <b>공식 고지서 요청</b> — 현장 현금 요구엔 응하지 않는 것이 원칙</li>
+        <li>사고 시: 이동 전 촬영 → 렌트사 연락 → <b>112</b> 신고</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TENIR ============ -->
+<section id="tenir">
+  <div class="sec-title"><span class="sec-num">05</span><h2>테니르 에코 호텔 이동 가이드</h2></div>
+  <p class="sec-desc">Kazakhstan Hotel → 탈가르 패스 3,200m · 접근 수단은 케이블카뿐 · 3구간 환승, 순수 탑승 약 45분</p>
+
+  <div class="wrap-table">
+    <table class="data">
+      <tr><th style="width:90px">STEP</th><th style="width:200px">구간</th><th>내용</th></tr>
+      <tr>
+        <td data-label="STEP"><b>1</b></td><td data-label="구간">시내 → 메데우</td>
+        <td data-label="내용">Yandex Go로 'Medeu Gondola Station' (약 30분) · 하부 정류장 해발 1,690m<span class="sub-note">호텔 맞은편 12번 버스도 직행하지만 짐 있으면 택시 권장</span></td>
+      </tr>
+      <tr>
+        <td data-label="STEP"><b>2</b></td><td data-label="구간">티켓 <span class="badge b-done">구매 불필요</span></td>
+        <td data-label="내용">Premium 요금제에 <b>왕복 케이블카 티켓 포함</b> · 전날 슈퍼바이저가 전자티켓 발송<span class="sub-note">💰 보증금 50,000텡게 현금 — 알마티 시내에서 미리 인출</span></td>
+      </tr>
+      <tr>
+        <td data-label="STEP"><b>3</b></td><td data-label="구간">케이블카 3구간</td>
+        <td data-label="내용">① 메데우 → 침블락 베이스(2,200m) 약 22~24분 ② Combi-1 → 중간역(2,800m) 약 12~13분 ③ Combi-2 → 탈가르 패스(3,200m) 약 7~8분</td>
+      </tr>
+      <tr>
+        <td data-label="STEP"><b>4</b></td><td data-label="구간">하차 → 호텔</td>
+        <td data-label="내용">내리막 <b>흙길·돌길 도보 몇 분</b> — 캐리어 끌기 어려움, 짐 운반 서비스(유료) 요청 가능<span class="sub-note">체크인 15:30 · 체크아웃 11:00 · WhatsApp +7 700 313 14 15</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card">
+      <h3><span class="ic">🍽</span>저녁 식사 옵션</h3>
+      <ul class="list">
+        <li><b>① 호텔 레스토랑 / Oblaka</b> — 정상, 도보 0분, 21시 마감 <span class="badge b-info">Day 6 추천</span></li>
+        <li><b>② SNEG(Le Mont)</b> — 미드스테이션 정찬, 투숙객 전용 케이블카 이용 <span class="badge b-info">Day 7 추천</span></li>
+        <li><b>③ 캐빈에서 간단히</b> — 시내에서 먹거리 지참(백업, 시간 제약 없음)</li>
+        <li><b>Syn 32</b> — 정상 돔 레스토랑, 낮 티타임용(핫초콜릿·블루베리 민트차)</li>
+      </ul>
+    </div>
+
+    <div class="alert a-warn" style="margin-top:0">
+      <h4>⏰ 시간 제약 — 이것만은 꼭</h4>
+      <ul>
+        <li><b>케이블카 운행 09:00~16:30 · 마지막 등정 16:00</b> — Day 6 오전 등정이면 여유 충분</li>
+        <li>산 위 식당은 이른 오후 마감, 호텔 레스토랑도 21시 마감 — 간식 지참</li>
+        <li>봄·가을 곤돌라 정기 점검 휴장 — 출발 전 공식 운행 일정 확인</li>
+        <li>고산 3,200m — 몸 상태 안 좋으면 하산 결정 빠르게</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PREP ============ -->
+<section id="prep">
+  <div class="sec-title"><span class="sec-num">06</span><h2>준비물 &amp; 짐 구성</h2></div>
+  <p class="sec-desc">캐리어는 알마티에 두 번 맡기고, 배낭 하나로 두 번의 미니 원정</p>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3><span class="ic">🧳</span>짐 구성 전략 — 이원화</h3>
+      <ul class="list">
+        <li><b>큰 캐리어 ×2 (알마티 거점)</b> — 도시옷, Auyl용 세미 정장, 쇼핑 여유 공간 + 완충재<span class="sub-note">9/4~7, 9/8~10 두 번 호텔 무료 보관 — "캐리어는 알마티에 산다"</span></li>
+        <li><b>보조 더플/배낭 (원정 공용)</b> — 키르기스 3박 · 테니르 2박 재사용<span class="sub-note">키르기스 모드: 수영복·트레킹복·방한 겉옷 / 테니르 모드: 패딩·비니·장갑·핫팩·수영복</span></li>
+        <li><b>서류 파우치(기내)</b> — 여권, 면허 2종, e티켓, 바우처, 달러 현금</li>
+        <li><b>상비 파우치</b> — 두통약, 지사제, 소화제, 밴드, 립밤·보습제, 선크림</li>
+        <li><b>전자 파우치</b> — 보조배터리, 케이블, 차량 충전기, 헤드랜턴</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ic">👕</span>옷차림 — 일교차가 관건</h3>
+      <ul class="list">
+        <li>9월 알마티·비슈케크: 낮 22~27℃ / 밤 8~12℃ — 레이어드</li>
+        <li><b>침블락 3,200m 2박</b>: 밤 0℃ 안팎 — 경량 패딩, 방풍자켓, 비니·장갑</li>
+        <li>트레킹화(협곡·폭포·빙하용) + 편한 운동화</li>
+        <li>수영복(이식쿨, 사우나) · 선글라스 · 챙 모자 · 선크림</li>
+        <li>파인다이닝(Auyl)용 세미 정장 한 벌</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ic">📄</span>서류 · 통신</h3>
+      <ul class="list">
+        <li><b>여권</b> 유효기간 6개월 이상 — 양국 무비자</li>
+        <li><b>국제운전면허증 + 한국 면허 원본</b></li>
+        <li>항공권 e-티켓 · 숙소 바우처 4곳 · 렌터카 확인서 · 보험 증서</li>
+        <li><b>eSIM 또는 현지 유심</b> — 카자흐: Beeline·Kcell / 키르기스: O!·Megacom</li>
+        <li>오프라인 지도 <b>2GIS</b> + 구글맵 · <b>Yandex Go</b> · 러시아어 번역 앱</li>
+        <li>콘센트 220V 유럽식(C/F) — <b>한국 플러그 그대로 사용</b>, 어댑터 불필요</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ic">💊</span>건강 · 고산 대비</h3>
+      <ul class="list">
+        <li><b>3,200m에서 2박</b> — 두통약, 충분한 수분, 첫날은 천천히<span class="sub-note">두통·메스꺼움 심하면 하산 · 고산 숙박 중 음주는 가볍게</span></li>
+        <li>상비약 — 지사제(물갈이), 소화제, 감기약, 밴드</li>
+        <li>수돗물 음용 금지 — 생수 구입(양치도 예민하면 생수)</li>
+        <li>헤드랜턴 — 이식쿨 별 관측 &amp; 시골 밤길</li>
+        <li>고산 자외선 매우 강함 — 선크림·선글라스 필수</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MONEY ============ -->
+<section id="money">
+  <div class="sec-title"><span class="sec-num">07</span><h2>환전 &amp; 결제 계획</h2></div>
+  <p class="sec-desc">$1 ≈ 470텡게(KZT) · $1 ≈ 88솜(KGS) — 2026.07 기준, 출발 전 재확인</p>
+
+  <div class="grid g3">
+    <div class="kpi">
+      <div class="label">총 달러 준비</div>
+      <div class="val">$1,000<span class="unit">내외</span></div>
+      <div class="note">여행비 $600 + 렌터카 $380 (신권 위주)</div>
+    </div>
+    <div class="kpi">
+      <div class="label">렌터카 현금 (인수 시)</div>
+      <div class="val">$380</div>
+      <div class="note">보증금 300(환급) + 배달 20 + 반납 60</div>
+    </div>
+    <div class="kpi">
+      <div class="label">실지출 (렌터카 현금분)</div>
+      <div class="val">$80</div>
+      <div class="note">9/7 공항에서 $300 현금 환급</div>
+    </div>
+  </div>
+
+  <div class="alert a-crit" style="margin-top:16px">
+    <h4>💵 렌터카 결제 구조 <span class="badge b-done" style="margin-left:6px">확정</span></h4>
+    <ul>
+      <li><b>인수 시 총 600 USD</b> = 렌트비 300 + 보증금 300<span class="sub-note">렌트비 300은 카드 결제 가능 · 보증금 300은 반드시 현금</span></li>
+      <li><b>보증금 300 USD</b> — 반납 후 조건 충족 시 <b>현금 환급</b></li>
+      <li><b>호텔 배달 20 USD</b> (1,700솜) · <b>공항 반납 60 USD</b> (5,220솜) — 달러·솜 모두 가능</li>
+      <li><b>환급 조건</b> — 외부 세차 + 실내 진공청소 + 연료 만탱크 반납<span class="sub-note">미이행 시 청소비 2,500솜 차감 + 공항 현장 환급 불가(후일 경리부서 처리)</span></li>
+      <li>이미 온라인 결제 완료: 187,542원 (렌터카 66,591 + Trip.com 보험 120,951)</li>
+    </ul>
+  </div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card">
+      <h3><span class="ic">💱</span>환전 전략</h3>
+      <ul class="list">
+        <li><b>여행비 $600 배분</b> — 키르기스 $200(공항 $30 + 시내 $170) · 카자흐 $300~350(Day 5 저녁 환전) · 예비 $50~100 달러 보관</li>
+        <li><b>암산법</b> — 텡게 ×3 ≈ 원화(1만 텡게 ≈ 2.9만 원) · 솜 ×16 ≈ 원화(1,000솜 ≈ 1.6만 원)</li>
+        <li><b>공항은 최소만, 시내 환전소가 유리</b> — 훼손 없는 신권일수록 환율 좋음</li>
+        <li><b>Day 5 저녁 메인 환전</b> — 텡게가 실제 필요해지는 시점(보증금~Day 9)에 맞춤</li>
+        <li>테니르 <b>보증금 5만 텡게는 Day 8 환불</b> → 후반 여행 자금으로 재활용</li>
+        <li>남은 솜은 <b>Day 5 출국 전 소진/재환전</b> — 나라 밖에선 처분 불가</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ic">💳</span>카드 · ATM</h3>
+      <ul class="list">
+        <li>도시에서는 카드 결제 원활 — <b>이식쿨 남안은 현금 전용</b></li>
+        <li><b>카자흐</b> — 공항·시내 ATM 인출 가능(KZT 지원 여부 앱에서 사전 확인)</li>
+        <li><b>키르기스</b> — <b>Optima Bank ATM</b> 권장, 비슈케크에서만 가능</li>
+        <li><b>DCC 주의</b> — 화면에 원화 결제 뜨면 반드시 <b>"Without Conversion"</b>(현지통화) 선택</li>
+        <li>현금 필요처: 주유(시골), 시장, 팁, 테니르 보증금, 스카즈카 입장료</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLACES ============ -->
+<section id="places">
+  <div class="sec-title"><span class="sec-num">08</span><h2>이식쿨 호수 명소</h2></div>
+  <p class="sec-desc">람사르 습지로 지정된 청정 호수 — 남안 토소르 중심</p>
+
+  <div class="grid g3">
+    <div class="card">
+      <h3><span class="ic">💧</span>바르스콘 폭포</h3>
+      <ul class="list">
+        <li>토소르에서 접근 좋은 남안 대표 계곡 — 침엽수림과 암벽 사이 물줄기</li>
+        <li><b>유리 가가린</b>이 휴양 왔던 곳, 초입에 기념비</li>
+        <li>가벼운 트레킹 · <span class="badge b-info">Day 4</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🏜</span>스카즈카 캐니언</h3>
+      <ul class="list">
+        <li>러시아어 '동화' — 붉은 점토·사암 풍화 협곡, 화성 같은 풍경</li>
+        <li>능선 오르면 <b>푸른 호수 × 붉은 협곡</b> 대비 조망</li>
+        <li>입장 50솜 · 늦은 오후 빛 최적 · <span class="badge b-info">Day 3</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✨</span>토소르 해변 &amp; 별</h3>
+      <ul class="list">
+        <li>염분 낮고 사계절 얼지 않는 청정 호수, 조용한 해변</li>
+        <li>밤이면 인공 불빛 차단 — <b>은하수 관측 최고 명소</b></li>
+        <li>관측은 21시부터 · <span class="badge b-info">Day 4</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert a-info">
+    <h4>동선상 선택 옵션</h4>
+    <ul>
+      <li><b>제티오구스</b> — 토소르 동쪽(카라콜 방면), '일곱 마리 황소' 붉은 바위 절벽과 초원</li>
+      <li><b>그리고리예프카 계곡</b> — 북안, 맑은 계곡물과 전통 유르트로 유목민 정취</li>
+      <li>두 곳 모두 토소르에서 동선이 벌어져 시간 여유 있을 때만 — SUV로 만나는 풍경 자체가 명소</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ FOOD ============ -->
+<section id="food">
+  <div class="sec-title"><span class="sec-num">09</span><h2>필수 미식 가이드</h2></div>
+  <p class="sec-desc">두 나라는 유목 민족의 뿌리를 공유해 대표 음식의 결이 비슷하다</p>
+
+  <div class="wrap-table">
+    <table class="data">
+      <tr><th style="width:190px">요리</th><th>설명</th><th style="width:170px">참고</th></tr>
+      <tr>
+        <td data-label="요리"><b>플롭 (Plov)</b></td>
+        <td data-label="설명">무쇠솥 '카잔'에 양고기·소고기를 볶고 노란 당근, 양파, 쿠민을 넣어 쌀과 쪄낸 요리. 고기 기름 밴 쌀과 당근 단맛이 어우러져 <b>한국인 입맛에 가장 잘 맞는다</b></td>
+        <td data-label="참고">NAVAT 1인분 약 $8<span class="sub-note">비슈케크 최고 수준</span></td>
+      </tr>
+      <tr>
+        <td data-label="요리"><b>샤슬릭 (Shashlik)</b></td>
+        <td data-label="설명">향신료에 재운 고기를 숯불(망갈)에 굽는 꼬치구이. 살코기 사이 <b>양 꼬리기름(쿠르듀크)</b>을 끼워 굽는 것이 정통. 절인 생양파와 함께</td>
+        <td data-label="참고">꼬치당 약 $4<span class="sub-note">양갈비 부위가 실패 확률 낮음</span></td>
+      </tr>
+      <tr>
+        <td data-label="요리"><b>베쉬바르막</b></td>
+        <td data-label="설명">유목민의 <b>영혼의 음식</b>. '다섯 손가락'이란 뜻으로 손으로 먹던 문화에서 유래. 삶은 말고기·양고기를 넓적한 면 위에 올리고 육수를 부어 먹는다</td>
+        <td data-label="참고"><span class="badge b-acc">문화 체험</span></td>
+      </tr>
+      <tr>
+        <td data-label="요리"><b>만티 (Manti)</b></td>
+        <td data-label="설명">중앙아시아식 고기 찐만두. 다진 양고기와 양파가 듬뿍 들어가 육즙이 풍부하다</td>
+        <td data-label="참고"><span class="badge b-low">입문용</span></td>
+      </tr>
+      <tr>
+        <td data-label="요리"><b>탄디르 레표시카</b></td>
+        <td data-label="설명">진흙 화덕 '탄디르' 벽에 붙여 구운 담백한 빵. 겉은 바삭 속은 쫄깃 — 소스 찍어 먹기 좋다</td>
+        <td data-label="참고"><span class="badge b-low">모든 상차림 기본</span></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ SHOPPING ============ -->
+<section id="shopping">
+  <div class="sec-title"><span class="sec-num">10</span><h2>동선 맞춤 쇼핑</h2></div>
+  <p class="sec-desc">들르는 순서대로 — 퀄리티 높은 것만 엄선</p>
+
+  <div class="grid g3">
+    <div class="card">
+      <h3><span class="ic">🍯</span>키르기스스탄 (Day 3~4)</h3>
+      <ul class="list">
+        <li><b>앗바쉬 화이트 허니</b> — Day 3 출발길 Globus<span class="sub-note">세계 양봉대회 수상 백목청, 뽀얀 크림 질감 · 고급 유리병 제품으로</span></li>
+        <li><b>펠트 수공예품</b> — 경유지 보콘바에보<span class="sub-note">남안 펠트 공예 중심 마을 · 카펫보다 노트북 케이스·자수 파우치·슬리퍼</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ic">🍫</span>알마티 (Day 8~9)</h3>
+      <ul class="list">
+        <li><b>라하트 초콜릿 본점</b> — 프리미엄 라인·틴케이스 세트</li>
+        <li><b>젤료니 바자르</b> — 무화과·말린 살구·호두 (건조품만 반입 가능)</li>
+        <li><b>Arba Wine</b> — 아사 밸리 프리미엄 와이너리<span class="sub-note">Lagyl Arba 사페라비(시그니처) · Ak Arba 리슬링(수상작) — Day 8 Auyl에서 시음 후 구매</span></li>
+        <li><b>카자흐스탄 꼬냑</b> — 품질 대비 가격 우수</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ic">🛒</span>Globus 장보기 (Day 3)</h3>
+      <ul class="list">
+        <li><b>메인</b> — 펠메니(7분 조리)+스메타나 / 망갈 있으면 양념 샤슬릭</li>
+        <li><b>빵·유제품</b> — 레표시카, 대형 크루아상, 현지 치즈</li>
+        <li><b>샐러드·과일</b> — 토마토·오이·양파·식초 + <b>9월 제철 멜론·수박</b></li>
+        <li><b>별밤</b> — Arpa 맥주, 조지아 와인, 견과 · <b>생수 대량 필수</b></li>
+        <li>입구에서 <b>무료 할인카드</b> 수령 후 계산</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3><span class="ic">🥃</span>주류 구매 가이드 — 알마티 공항 면세점 기준</h3>
+    <p style="font-size:13.5px;color:var(--ink-2);margin-bottom:14px">
+      면세점에 <b>카자흐 제품 코너</b>가 있어 국산 주류를 갖추고 있다. 현지 주류는 시내 가격도 저렴해 면세점이 극적으로 싸진 않지만,
+      <b>기내 반입이 가능해 파손·무게 리스크가 없다</b>는 점에서 유리하다. (탑승권 제시 필요)
+    </p>
+    <div class="wrap-table">
+      <table class="data">
+        <tr><th style="width:170px">품목</th><th>추천 &amp; 특징</th><th style="width:150px">가격대(예상)</th></tr>
+        <tr>
+          <td data-label="품목"><b>Bacchus 꼬냑</b><span class="sub-note">카자흐 대표 주류</span></td>
+          <td data-label="추천 &amp; 특징"><b>5년산 "Kazakhstan"</b> — 50년 된 오크 스테이브 용기에서 5년 숙성, 동양적 건과일 향과 부드러운 끝맛. 가장 무난한 대표 선택<span class="sub-note">3년산(보급형) · 7년 이상 라인 · 6년 빈티지 · "Asanali" 5년산 등도 있음</span></td>
+          <td data-label="가격대(예상)"><b>2~5만 원</b><span class="sub-note">3년산은 5천~1만 원대</span></td>
+        </tr>
+        <tr>
+          <td data-label="품목"><b>X.O. 기프트박스</b><span class="sub-note">선물용</span></td>
+          <td data-label="추천 &amp; 특징">Bacchus X.O. 또는 <b>Kaharman X.O.</b> — 선물박스 포장, 격식 있는 자리에 적합<span class="sub-note">Tengri X.O.도 현지 유통 브랜드</span></td>
+          <td data-label="가격대(예상)"><b>3~5만 원</b></td>
+        </tr>
+        <tr>
+          <td data-label="품목"><b>Arba Wine</b><span class="sub-note">아사 밸리 · 카자흐 프리미엄</span></td>
+          <td data-label="추천 &amp; 특징"><b>Lagyl Arba 사페라비</b>(시그니처 레드) · <b>Ak Arba 리슬링</b>(수상작 화이트)<span class="sub-note">⚠️ 면세점 재고 유동적 — 없으면 시내 Arba 와인숍/마트에서 구매해 위탁수하물로</span></td>
+          <td data-label="가격대(예상)"><b>6천~2만 원</b><span class="sub-note">1,800텡게부터</span></td>
+        </tr>
+      </table>
+    </div>
+    <div class="alert a-info" style="margin-top:14px">
+      <h4>추천 배분 (면세 한도 4병)</h4>
+      <ul>
+        <li><b>Arba 와인 2병 + Bacchus 꼬냑 2병</b> — 총액 대략 8~15만 원 선</li>
+        <li>꼬냑은 면세점에 거의 확실히 있으니 <b>공항에서</b> · 와인은 재고 불확실하니 <b>Day 8 Auyl에서 시음 → Day 9 시내 확보</b>가 안전</li>
+        <li>시내(Magnum)에서는 가격만 확인해두고, 확 싸거나 면세점에 없는 브랜드만 시내 구매</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert a-warn">
+    <h4>🛃 주류 면세 한도 &amp; 수하물</h4>
+    <ul>
+      <li>한국 입국 주류 면세: <b>1인 2병 · 합 2L · $400 이하</b> → 부부 합산 최대 4병 (와인 2 + 꼬냑 2 추천)</li>
+      <li>직항이므로 <b>알마티 공항 면세점 구매분은 기내 반입 가능</b> — 가장 안전</li>
+      <li>시내 구매 주류·꿀 유리병은 위탁수하물에 옷으로 완충 포장</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ CONTACTS ============ -->
+<section id="contacts">
+  <div class="sec-title"><span class="sec-num">11</span><h2>연락처 &amp; 안전</h2></div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3><span class="ic">🇰🇷</span>재외공관 · 영사 긴급</h3>
+      <ul class="list">
+        <li><b>영사안전콜센터 (서울, 24시간)</b> — <b>+82-2-3210-0404</b><span class="sub-note">근무시간 외 사건사고 접수 및 일반 영사 상담 · 스마트폰에 '영사안전콜센터 무료전화' 앱 설치하면 무료</span></li>
+        <li><b>주키르기즈공화국 대사관</b> (비슈케크)<span class="sub-note">대표전화(근무시간) +996-312-57-00-55<br>긴급전화(근무시간 외) +996-500-579-773</span></li>
+        <li><b>주카자흐스탄 대사관</b> (아스타나)<span class="sub-note">영사업무 +7-7172-572-100 / 572-200<br><b>사건사고(알마티 지역) +7-777-705-6634</b> ← 우리 여행지 담당</span></li>
+        <li><b>주알마티 대한민국 총영사관</b><span class="sub-note">알마티 체류 중 영사 민원은 이쪽 — 방문 전 홈페이지에서 위치·업무시간 확인</span></li>
+        <li>업무시간 09:00~12:30, 13:30~18:00 (월–금)<span class="sub-note">현지에서 +7 대신 8을 눌러 발신 가능(카자흐스탄)</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ic">📞</span>현지 · 숙소 연락처</h3>
+      <ul class="list">
+        <li><b>Kazakhstan Hotel</b> — 리셉션 +7 727 291 91 01 (24h) · WhatsApp +7 775 069 34 67</li>
+        <li><b>Tenir Eco Hotel</b> — WhatsApp +7 700 313 14 15</li>
+        <li><b>긴급전화</b> — 키르기스스탄 <b>112</b> (경찰·구급 통합)</li>
+        <li>렌터카 업체 긴급 연락처 저장 (WhatsApp)</li>
+        <li>Orien Hotel(비슈케크) · 토소르 에어비앤비 호스트 연락처</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ic">🛡</span>안전 · 문화</h3>
+      <ul class="list">
+        <li>공항 호객 택시 대신 <b>공식 데스크 또는 Yandex Go</b></li>
+        <li>시장·번화가 소매치기 주의 · 밤늦은 인적 드문 골목 피하기</li>
+        <li><b>군사시설·국경·검문소 사진 촬영 금지</b></li>
+        <li>이슬람 문화권 — 모스크 방문 시 복장 단정히</li>
+        <li>고급 식당 서비스료 10% 포함 여부 확인, 팁은 필수 아님</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ic">📋</span>출발 전 저장 목록</h3>
+      <ul class="list">
+        <li>여권 사본 · 면허 2종 사본 (휴대폰 사진 + 클라우드)</li>
+        <li>항공권 e-티켓 3건 · 숙소 바우처 4곳 · 렌터카 확인서</li>
+        <li>여행자보험 증서 &amp; 보험사 해외 긴급지원 번호</li>
+        <li>위 대사관·영사콜센터 번호 <b>연락처에 미리 등록</b></li>
+        <li>카드사 분실신고 번호 (해외 발신용)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="t">카자흐스탄 · 키르기스스탄 9박 10일</div>
+  2026.09.03 – 09.12 · 함께 만드는 여행 계획표
+</footer>
+
+</div>
+</body>
+</html>
