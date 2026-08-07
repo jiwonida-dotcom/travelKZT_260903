@@ -194,6 +194,50 @@ footer{
 }
 footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
 
+/* ---------- 환율 계산기 ---------- */
+.calc-wrap{display:flex;flex-direction:column;gap:16px}
+.calc-lbl{display:block;font-size:12.5px;font-weight:700;color:var(--ink-3);margin-bottom:8px}
+.calc-input-row{display:flex;gap:10px}
+.calc-input{
+  flex:1;min-width:0;padding:14px 16px;font-size:22px;font-weight:800;
+  border:1px solid var(--border);border-radius:14px;background:var(--bg);
+  color:var(--ink);font-family:inherit;letter-spacing:-.02em;
+}
+.calc-input:focus{outline:none;border-color:var(--accent);background:var(--surface)}
+.calc-sel{
+  padding:14px 12px;font-size:14px;font-weight:600;font-family:inherit;
+  border:1px solid var(--border);border-radius:14px;background:var(--surface);
+  color:var(--ink);cursor:pointer;
+}
+.calc-sel:focus{outline:none;border-color:var(--accent)}
+.calc-out{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+}
+@media(max-width:560px){.calc-out{grid-template-columns:1fr}}
+.calc-cell{
+  background:var(--accent-soft);border:1px solid #E4DEFC;border-radius:14px;
+  padding:14px 16px;
+}
+.calc-cell .c-lbl{font-size:11.5px;font-weight:700;color:#7C6BD4;margin-bottom:4px}
+.calc-cell .c-val{font-size:19px;font-weight:800;color:#3F3468;letter-spacing:-.02em;line-height:1.2}
+.calc-rate{border-top:1px solid var(--border);padding-top:14px}
+.calc-rate > span{font-size:12px;font-weight:700;color:var(--ink-3);display:block;margin-bottom:8px}
+.calc-rate-row{display:flex;flex-wrap:wrap;gap:8px 18px}
+.calc-rate-row label{font-size:13px;color:var(--ink-2);display:flex;align-items:center;gap:5px}
+.calc-mini{
+  width:74px;padding:6px 8px;font-size:13px;font-weight:700;font-family:inherit;
+  border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--ink);
+}
+.calc-mini:focus{outline:none;border-color:var(--accent)}
+.calc-quick-lbl{font-size:12px;font-weight:700;color:var(--ink-3);display:block;margin-bottom:8px}
+.calc-chips{display:flex;flex-wrap:wrap;gap:7px}
+.calc-chip{
+  padding:7px 13px;font-size:12.5px;font-weight:600;font-family:inherit;
+  border:1px solid var(--border);border-radius:999px;background:var(--surface);
+  color:var(--ink-2);cursor:pointer;transition:all .12s;
+}
+.calc-chip:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+
 @media(max-width:640px){
   body{font-size:14.5px}
   h1{font-size:27px;letter-spacing:-.02em}
@@ -806,6 +850,45 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
   <div class="sec-title"><span class="sec-num">08</span><h2>환전 &amp; 결제 계획</h2></div>
   <p class="sec-desc">$1 ≈ 470텡게(KZT) · $1 ≈ 88솜(KGS) — 2026.07 기준, 출발 전 재확인</p>
 
+  <!-- 환율 계산기 위젯 -->
+  <div class="card" style="margin-bottom:16px">
+    <h3><span class="ic">🧮</span>환율 계산기 <span class="badge b-info" style="margin-left:4px">오프라인 작동</span></h3>
+    <div class="calc-wrap">
+      <div class="calc-row">
+        <label class="calc-lbl">금액 입력</label>
+        <div class="calc-input-row">
+          <input type="number" id="calcAmt" value="10000" min="0" step="100" class="calc-input">
+          <select id="calcCur" class="calc-sel">
+            <option value="KZT">텡게 (KZT)</option>
+            <option value="KGS">솜 (KGS)</option>
+            <option value="KRW">원화 (KRW)</option>
+            <option value="USD">달러 (USD)</option>
+          </select>
+        </div>
+      </div>
+      <div class="calc-out" id="calcOut"></div>
+      <div class="calc-rate">
+        <span>기준 환율 (수정 가능)</span>
+        <div class="calc-rate-row">
+          <label>$1 = <input type="number" id="rKZT" value="470" step="1" class="calc-mini"> 텡게</label>
+          <label>$1 = <input type="number" id="rKGS" value="88" step="0.5" class="calc-mini"> 솜</label>
+          <label>$1 = <input type="number" id="rKRW" value="1380" step="10" class="calc-mini"> 원</label>
+        </div>
+      </div>
+      <div class="calc-quick">
+        <span class="calc-quick-lbl">자주 쓰는 금액</span>
+        <div class="calc-chips">
+          <button class="calc-chip" data-a="1000" data-c="KZT">1,000텡게</button>
+          <button class="calc-chip" data-a="10000" data-c="KZT">1만텡게</button>
+          <button class="calc-chip" data-a="50000" data-c="KZT">5만텡게(보증금)</button>
+          <button class="calc-chip" data-a="500" data-c="KGS">500솜</button>
+          <button class="calc-chip" data-a="1700" data-c="KGS">1,700솜(배달)</button>
+          <button class="calc-chip" data-a="5220" data-c="KGS">5,220솜(반납)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="grid g3">
     <div class="kpi">
       <div class="label">총 달러 준비</div>
@@ -1079,5 +1162,61 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
 </footer>
 
 </div>
+<script>
+(function(){
+  var amt=document.getElementById('calcAmt'),
+      cur=document.getElementById('calcCur'),
+      out=document.getElementById('calcOut'),
+      rKZT=document.getElementById('rKZT'),
+      rKGS=document.getElementById('rKGS'),
+      rKRW=document.getElementById('rKRW');
+  if(!amt) return;
+
+  var NAME={KZT:'텡게',KGS:'솜',KRW:'원',USD:'달러'};
+
+  function fmt(n){
+    if(!isFinite(n)) return '-';
+    if(n>=100) return Math.round(n).toLocaleString('ko-KR');
+    if(n>=10) return n.toFixed(1);
+    return n.toFixed(2);
+  }
+
+  function calc(){
+    var v=parseFloat(amt.value)||0,
+        kzt=parseFloat(rKZT.value)||470,
+        kgs=parseFloat(rKGS.value)||88,
+        krw=parseFloat(rKRW.value)||1380,
+        c=cur.value, usd;
+
+    if(c==='USD') usd=v;
+    else if(c==='KZT') usd=v/kzt;
+    else if(c==='KGS') usd=v/kgs;
+    else usd=v/krw;
+
+    var res={USD:usd, KZT:usd*kzt, KGS:usd*kgs, KRW:usd*krw};
+    var order=['KRW','KZT','KGS','USD'].filter(function(k){return k!==c;});
+
+    out.innerHTML=order.map(function(k){
+      return '<div class="calc-cell"><div class="c-lbl">'+NAME[k]+' ('+k+')</div>'+
+             '<div class="c-val">'+fmt(res[k])+'</div></div>';
+    }).join('');
+  }
+
+  [amt,cur,rKZT,rKGS,rKRW].forEach(function(el){
+    el.addEventListener('input',calc);
+    el.addEventListener('change',calc);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.calc-chip'),function(b){
+    b.addEventListener('click',function(){
+      amt.value=b.getAttribute('data-a');
+      cur.value=b.getAttribute('data-c');
+      calc();
+    });
+  });
+
+  calc();
+})();
+</script>
 </body>
 </html>
