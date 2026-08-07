@@ -672,7 +672,7 @@ details.acc > summary:hover .acc-title{color:var(--accent-2)}
     <!-- 금액 변환 (위) -->
     <div class="calc-wrap">
       <div class="calc-row">
-        <label class="calc-lbl">금액 변환</label>
+        <label class="calc-lbl">금액 변환 <span id="ctxHint" class="badge b-acc" style="margin-left:6px"></span></label>
         <div class="calc-input-row">
           <input type="number" id="calcAmt" value="10000" min="0" step="100" class="calc-input">
           <select id="calcCur" class="calc-sel">
@@ -1770,6 +1770,33 @@ details.acc > summary:hover .acc-title{color:var(--accent-2)}
     });
   });
   if(btn) btn.addEventListener('click',fetchRates);
+
+  // ── 일정 기반 기본 통화 자동 설정 ──
+  // 9/4 17:00 ~ 9/7 15:00 = 키르기스스탄(솜), 그 외 여행 기간 = 카자흐스탄(텡게)
+  function scheduleCurrency(){
+    var now=new Date(), y=now.getFullYear();
+    var kgIn =new Date(2026,8,4,17,0),   // 9/4 17:00 비슈케크 도착
+        kgOut=new Date(2026,8,7,15,0),   // 9/7 15:00 알마티행 출발
+        tripS=new Date(2026,8,3,0,0),
+        tripE=new Date(2026,8,12,12,0);
+    var hint=document.getElementById('ctxHint');
+    var cc, label;
+
+    if(now>=kgIn && now<kgOut){
+      cc='KGS'; label='🇰🇬 키르기스스탄 · 솜 기준';
+    }else if(now>=tripS && now<=tripE){
+      cc='KZT'; label='🇰🇿 카자흐스탄 · 텡게 기준';
+    }else if(now<tripS){
+      cc='KZT';
+      var d=Math.ceil((tripS-now)/86400000);
+      label='출발 D-'+d+' · 텡게 기준';
+    }else{
+      cc='KRW'; label='여행 종료';
+    }
+    if(hint) hint.textContent=label;
+    cur.value=cc;
+  }
+  scheduleCurrency();
 
   paintLive(); calc(); fetchRates();
 })();
