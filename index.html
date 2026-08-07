@@ -6,19 +6,33 @@
 <title>카자흐스탄 · 키르기스스탄 여행 리포트 | 2026.09.03 – 09.12</title>
 <style>
 :root{
-  --bg:#FAFAFB;
+  --bg:#E9E8F7;              /* 라벤더 페이지 배경 */
   --surface:#FFFFFF;
-  --border:#ECECF1;
-  --ink:#18181B;
-  --ink-2:#52525B;
-  --ink-3:#8E8E97;
-  --accent:#8B7CF6;
-  --accent-soft:#F1EEFE;
-  --red:#F87171;      --red-bg:#FEF1F1;
-  --amber:#F59E0B;    --amber-bg:#FEF7EC;
-  --blue:#60A5FA;     --blue-bg:#EFF6FF;
-  --green:#34D399;    --green-bg:#ECFDF5;
-  --gray:#9CA3AF;     --gray-bg:#F4F4F6;
+  --surface-2:#F5F4FB;
+  --border:#ECEBF3;
+  --border-2:#E0DEEE;
+  --ink:#1B1B2E;             /* 근블랙(쿨) */
+  --ink-2:#5B5B73;
+  --ink-3:#9B9BB0;
+  --accent:#6C5CE7;          /* 바이올렛 주색 */
+  --accent-2:#5647C9;        /* 텍스트용 진바이올렛 */
+  --accent-soft:#EEEBFD;
+  --accent-line:#DAD4FA;
+  --terra:#EC4899;           /* 마젠타 핑크 보조색 */
+  --terra-2:#C62E7C;
+  --terra-soft:#FCE7F1;
+  --terra-line:#F6C9E0;
+  --pink:#EC4899;    --pink-soft:#FCE7F1;
+  --red:#F26D6D;      --red-bg:#FDECEC;
+  --amber:#F5A623;    --amber-bg:#FEF4E4;
+  --blue:#5B8DEF;     --blue-bg:#EAF1FE;
+  --green:#2FBF8F;    --green-bg:#E5F7F0;
+  --gray:#9B9BB0;     --gray-bg:#F2F2F7;
+  --shadow-sm:0 1px 2px rgba(27,27,46,.04),0 2px 8px rgba(108,92,231,.05);
+  --shadow-md:0 8px 24px -8px rgba(108,92,231,.14),0 4px 10px rgba(27,27,46,.04);
+  --shadow-lg:0 20px 48px -16px rgba(108,92,231,.24),0 8px 20px -8px rgba(27,27,46,.10);
+  --shell-shadow:0 40px 90px -36px rgba(70,55,150,.40),0 12px 32px -16px rgba(70,55,150,.20);
+  --shell-r:34px;   /* 앱 셸 = 헤더 공통 모서리 반경 */
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -51,10 +65,12 @@ h1 .sub{color:var(--ink-3);font-weight:600}
 
 /* ---------- nav ---------- */
 nav{
-  position:sticky;top:0;z-index:20;background:rgba(250,250,251,.92);
-  backdrop-filter:blur(8px);border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:20;background:rgba(255,255,255,.86);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--border);
 }
-.nav-in{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;gap:4px;overflow-x:auto}
+.nav-in{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;overflow-x:auto}
+/* 여유 공간이 있으면 가운데 정렬, 넘치면 auto 마진이 0이 되어 처음부터 스크롤 가능 */
+.nav-inner{display:flex;gap:4px;margin:0 auto}
 nav a{
   padding:14px 14px;font-size:13.5px;font-weight:600;color:var(--ink-3);
   text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;
@@ -93,24 +109,25 @@ section{margin-top:64px;scroll-margin-top:60px}
 
 /* ---------- summary ---------- */
 .summary{
-  background:var(--accent-soft);border:1px solid #E4DEFC;border-radius:20px;
-  padding:26px 28px;margin-bottom:20px;
+  background:linear-gradient(120deg,var(--accent-soft) 0%,#F3EDFC 55%,var(--pink-soft) 130%);
+  border:1px solid var(--accent-line);border-radius:24px;
+  padding:26px 28px;margin-bottom:20px;box-shadow:var(--shadow-sm);
 }
-.summary p{font-size:15px;color:#3F3468;line-height:1.75}
+.summary p{font-size:15px;color:#3A2E63;line-height:1.75}
 .summary p + p{margin-top:12px}
-.summary b{font-weight:700;color:#2E2551}
+.summary b{font-weight:700;color:var(--accent-2)}
 
 /* ---------- badges ---------- */
 .badge{
   display:inline-flex;align-items:center;font-size:11.5px;font-weight:700;
   padding:4px 10px;border-radius:999px;letter-spacing:.01em;
 }
-.b-done{background:var(--green-bg);color:#059669}
-.b-todo{background:var(--amber-bg);color:#B45309}
-.b-crit{background:var(--red-bg);color:#DC2626}
-.b-info{background:var(--blue-bg);color:#2563EB}
-.b-low{background:var(--gray-bg);color:#6B7280}
-.b-acc{background:var(--accent-soft);color:#6D5BD0;border:1px solid #DDD5FB}
+.b-done{background:var(--green-bg);color:#1E7A4F}
+.b-todo{background:var(--amber-bg);color:#8C5C12}
+.b-crit{background:var(--red-bg);color:#A23C2A}
+.b-info{background:var(--blue-bg);color:#25607F}
+.b-low{background:var(--gray-bg);color:#6B716A}
+.b-acc{background:var(--accent-soft);color:var(--accent-2);border:1px solid var(--accent-line)}
 
 /* ---------- timeline ---------- */
 .day{
@@ -122,7 +139,7 @@ section{margin-top:64px;scroll-margin-top:60px}
   font-size:12px;font-weight:800;color:var(--accent);background:var(--accent-soft);
   padding:5px 12px;border-radius:8px;
 }
-.day-tag.kg{color:#C2410C;background:#FFF4ED}
+.day-tag.kg{color:var(--terra);background:var(--terra-soft)}
 .day-date{font-size:13px;color:var(--ink-3);font-weight:600}
 .day-title{font-size:17px;font-weight:800;letter-spacing:-.02em;margin:6px 0 16px}
 .sched{width:100%;border-collapse:collapse}
@@ -132,7 +149,7 @@ section{margin-top:64px;scroll-margin-top:60px}
   width:110px;padding-right:16px;white-space:nowrap;
   font-size:12.5px;font-weight:700;color:var(--accent);
 }
-.day.kg .sched .t{color:#C2410C}
+.day.kg .sched .t{color:var(--terra)}
 .sub-note{display:block;font-size:12.5px;color:var(--ink-3);margin-top:5px;line-height:1.6}
 .stay{
   margin-top:16px;padding:12px 16px;background:var(--bg);border-radius:12px;
@@ -178,14 +195,14 @@ ul.list li b{font-weight:700}
 .alert ul{list-style:none}
 .alert li{padding:5px 0 5px 16px;position:relative;line-height:1.6}
 .alert li::before{content:"";position:absolute;left:0;top:13px;width:4px;height:4px;border-radius:50%}
-.a-warn{background:var(--amber-bg);border:1px solid #F7E4C3}
-.a-warn h4{color:#B45309}
+.a-warn{background:var(--amber-bg);border:1px solid #EAD8B2}
+.a-warn h4{color:#8C5C12}
 .a-warn li::before{background:var(--amber)}
-.a-crit{background:var(--red-bg);border:1px solid #FADCDC}
-.a-crit h4{color:#DC2626}
+.a-crit{background:var(--red-bg);border:1px solid #EBCDC2}
+.a-crit h4{color:#A23C2A}
 .a-crit li::before{background:var(--red)}
-.a-info{background:var(--blue-bg);border:1px solid #D8E8FE}
-.a-info h4{color:#2563EB}
+.a-info{background:var(--blue-bg);border:1px solid #CFE0EB}
+.a-info h4{color:#25607F}
 .a-info li::before{background:var(--blue)}
 
 
@@ -245,13 +262,18 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
 .calc-out{
   display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
 }
-@media(max-width:560px){.calc-out{grid-template-columns:1fr}}
+@media(max-width:560px){
+  .calc-out{grid-template-columns:repeat(3,1fr);gap:7px}
+  .calc-cell{padding:11px 10px}
+  .calc-cell .c-lbl{font-size:10px;margin-bottom:3px;white-space:nowrap}
+  .calc-cell .c-val{font-size:16px}
+}
 .calc-cell{
-  background:var(--accent-soft);border:1px solid #E4DEFC;border-radius:14px;
+  background:var(--accent-soft);border:1px solid var(--accent-line);border-radius:14px;
   padding:14px 16px;
 }
-.calc-cell .c-lbl{font-size:11.5px;font-weight:700;color:#7C6BD4;margin-bottom:4px}
-.calc-cell .c-val{font-size:19px;font-weight:800;color:#3F3468;letter-spacing:-.02em;line-height:1.2}
+.calc-cell .c-lbl{font-size:11.5px;font-weight:700;color:var(--accent-2);margin-bottom:4px}
+.calc-cell .c-val{font-size:19px;font-weight:800;color:var(--accent-2);letter-spacing:-.02em;line-height:1.2}
 .calc-rate{border-top:1px solid var(--border);padding-top:14px}
 .calc-rate > span{font-size:12px;font-weight:700;color:var(--ink-3);display:block;margin-bottom:8px}
 .calc-rate-row{display:flex;flex-wrap:wrap;gap:8px 18px}
@@ -272,14 +294,24 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
 
 /* ---------- 실시간 환율 박스 ---------- */
 .live-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:620px){.live-grid{grid-template-columns:1fr}}
+/* 수치 타일 그룹은 좁은 화면에서도 가로 유지 (환율 결과 타일과 동일 기준) */
+@media(max-width:620px){
+  .stats.g4{grid-template-columns:repeat(2,1fr);gap:10px}   /* 요약 KPI → 2×2 */
+  .stats.g3{grid-template-columns:repeat(3,1fr);gap:8px}    /* 환전 KPI → 3열 */
+  .stats .kpi{padding:14px 12px}
+  .stats .kpi .label{font-size:11px}
+  .stats.g4 .kpi .val{font-size:22px}
+  .stats.g3 .kpi .val{font-size:18px}
+  .stats.g3 .kpi .note{font-size:10.5px;line-height:1.45}
+  .live-grid{grid-template-columns:1fr}   /* 텡게·솜 박스는 문장형이라 스택 유지 */
+}
 .live-box{
   display:flex;gap:14px;align-items:center;
   border:1px solid var(--border);border-radius:16px;padding:16px 18px;
   background:var(--bg);
 }
-.live-box.kzt{background:#F0F7FF;border-color:#D9E9FC}
-.live-box.kgs{background:#FFF5F0;border-color:#FBE0D2}
+.live-box.kzt{background:var(--accent-soft);border-color:var(--accent-line)}
+.live-box.kgs{background:var(--terra-soft);border-color:var(--terra-line)}
 .lb-flag{font-size:30px;line-height:1;flex:none}
 .lb-body{min-width:0}
 .lb-name{font-size:12px;font-weight:700;color:var(--ink-3);margin-bottom:3px}
@@ -379,7 +411,7 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
 .tp-head #taskCount{color:var(--accent);font-weight:800}
 .tp-track{height:9px;background:var(--bg);border-radius:99px;overflow:hidden}
 .tp-fill{height:100%;width:0;border-radius:99px;
-  background:linear-gradient(90deg,var(--accent),#A78BFA);transition:width .35s ease}
+  background:linear-gradient(90deg,var(--accent),#16A892);transition:width .35s ease}
 
 /* ---------- 개선: 준비항목 체크박스 ---------- */
 .chkbox{display:inline-flex;align-items:center;gap:9px;cursor:pointer}
@@ -393,10 +425,157 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
   font-size:11px;font-weight:800;color:#fff;background:var(--accent);
   padding:4px 10px;border-radius:8px;letter-spacing:.02em;
 }
+
+/* ===== 디자인 고도화: 핀테크 SaaS (바이올렛·핑크) ===== */
+body{letter-spacing:-.003em;padding:0}
+::selection{background:var(--accent-soft);color:var(--accent-2)}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+/* 앱 셸 — 라벤더 배경 위 흰 카드 */
+.app-shell{
+  max-width:1280px;margin:28px auto;background:var(--surface);
+  border-radius:var(--shell-r);box-shadow:var(--shell-shadow);
+}
+@media(max-width:900px){:root{--shell-r:26px} .app-shell{margin:14px}}
+@media(max-width:640px){:root{--shell-r:22px} .app-shell{margin:8px}}
+
+/* 히어로 — 모서리는 셸과 동일 반경(어긋나면 흰 코너가 비침) */
+header{position:relative;overflow:hidden;
+  border-radius:var(--shell-r) var(--shell-r) 0 0;
+  background:linear-gradient(180deg,#FFFFFF 0%,#FBFAFF 100%)}
+header::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(1100px 440px at 12% -25%,rgba(108,92,231,.16),transparent 60%),
+             radial-gradient(820px 360px at 98% -12%,rgba(236,72,153,.12),transparent 55%)}
+.head-in{position:relative;z-index:1}
+.eyebrow{background:linear-gradient(135deg,var(--accent-soft),var(--pink-soft));
+  color:var(--accent-2);border:1px solid var(--accent-line)}
+h1{background:linear-gradient(118deg,var(--ink) 30%,var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+h1 .sub{-webkit-text-fill-color:var(--ink-3)}
+.route span.node{background:var(--surface);box-shadow:var(--shadow-sm);
+  transition:transform .2s,box-shadow .2s}
+.route span.node:hover{transform:translateY(-1px);box-shadow:var(--shadow-md)}
+.route span.sep{color:var(--accent)}
+
+/* 카드 — 큰 라운드 + 소프트 섀도우 + 호버 */
+.card,.kpi,.day,.summary,details.acc{border-radius:24px}
+.wrap-table{border-radius:20px}
+.card,.kpi,.day,.wrap-table,.task-progress{box-shadow:var(--shadow-sm)}
+.card,.kpi,.day{transition:box-shadow .25s ease,transform .25s ease,border-color .25s ease}
+.card:hover,.day:hover{box-shadow:var(--shadow-md);border-color:var(--border-2)}
+.kpi:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--border-2)}
+details.acc{box-shadow:var(--shadow-sm);transition:box-shadow .25s ease}
+details.acc[open]{box-shadow:var(--shadow-md)}
+
+/* KPI 숫자 강조 */
+.kpi .val{background:linear-gradient(120deg,var(--ink),var(--accent));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.kpi .val .unit{-webkit-text-fill-color:var(--ink-2)}
+
+/* 섹션 넘버·아이콘 */
+.sec-num,.acc-num{background:linear-gradient(135deg,var(--accent),#8B7CF6);color:#fff;
+  box-shadow:0 4px 10px -2px rgba(108,92,231,.5)}
+.card h3 .ic{background:linear-gradient(135deg,var(--accent-soft),var(--pink-soft))}
+
+/* 데이 태그 — 카자흐 바이올렛 / 키르기스 핑크 */
+.day-tag{background:linear-gradient(135deg,var(--accent-soft),#E4DFFB)}
+.day-tag.kg{background:linear-gradient(135deg,var(--terra-soft),#FBDCEC)}
+
+/* 진행률 바 */
+.tp-fill{background:linear-gradient(90deg,var(--accent),var(--pink))}
+
+/* 네비·버튼 인터랙션 */
+nav a{transition:color .15s,border-color .15s}
+nav a.active{font-weight:700}
+.calc-chip{transition:all .15s ease}
+#toTop{box-shadow:var(--shadow-lg);color:var(--accent);border-color:var(--accent-line)}
+table.data th{letter-spacing:.03em}
+
+@media(max-width:640px){
+  .card,.kpi,.day,.summary,details.acc,.wrap-table{border-radius:18px}
+}
+
+/* ===== 뷰 토글 (여행 중 / 여행 전·후) ===== */
+.view-toggle-wrap{max-width:1200px;margin:0 auto;padding:22px 24px 6px;
+  display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px}
+@media(max-width:640px){.view-toggle-wrap{padding:16px 14px 4px;gap:8px}}
+.view-toggle{
+  display:inline-flex;align-items:center;gap:4px;background:var(--surface-2);
+  border:1px solid var(--border);border-radius:999px;padding:5px;box-shadow:var(--shadow-sm);
+}
+.vt-btn{
+  border:none;background:transparent;font-family:inherit;font-size:13.5px;font-weight:700;
+  color:var(--ink-3);padding:9px 18px;border-radius:999px;cursor:pointer;
+  transition:background .18s,color .18s,box-shadow .18s;white-space:nowrap;
+}
+.vt-btn:hover{color:var(--accent-2)}
+.vt-btn.active{background:var(--accent);color:#fff;box-shadow:0 4px 12px -2px rgba(108,92,231,.5)}
+.vt-btn.active:hover{color:#fff}
+@media(max-width:420px){
+  .vt-btn{padding:9px 14px;font-size:12.5px}
+}
+
+/* 모드별 표시 전환 */
+body.mode-during [data-phase="pre"]{display:none}
+body.mode-pre    [data-phase="during"]{display:none}
+
+/* 예산 — 토글과 같은 레벨의 독립 뷰 */
+body:not(.mode-budget) #budget{display:none}
+body.mode-budget nav{display:none}
+body.mode-budget .container > section:not(#budget),
+body.mode-budget .container > details,
+body.mode-budget .container > div{display:none}
+.vt-solo .vt-btn.active{background:linear-gradient(135deg,var(--accent),var(--pink))}
+body.mode-budget #budget{margin-top:28px}
+
+/* ===== 환율 위젯 재구성 ===== */
+.live-wrap{margin-top:18px;border-top:1px solid var(--border);padding-top:18px}
+.calc-rate-toggle{
+  display:inline-flex;align-items:center;gap:6px;background:none;border:none;
+  font-family:inherit;font-size:12.5px;font-weight:700;color:var(--ink-3);
+  cursor:pointer;padding:2px 0;transition:color .15s;
+}
+.calc-rate-toggle:hover{color:var(--accent-2)}
+.calc-rate-toggle .mr-arrow{font-size:10px;transition:transform .18s}
+.calc-rate-toggle[aria-expanded="true"] .mr-arrow{transform:rotate(180deg)}
+.calc-rate-body{margin-top:10px}
+.calc-rate-note{display:block;font-size:11.5px;color:var(--ink-3);margin-bottom:8px}
+
+/* ===== 예산: 지출 입력 ===== */
+.expinput{
+  width:100%;padding:9px 11px;font-size:14px;font-weight:700;font-family:inherit;
+  border:1px solid var(--border);border-radius:11px;background:var(--surface-2);
+  color:var(--ink);text-align:right;letter-spacing:-.01em;
+}
+.expinput:focus{outline:none;border-color:var(--accent);background:var(--surface)}
+.expinput::placeholder{color:var(--ink-3);font-weight:600}
+.exp-foot{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:12px;
+}
+.exp-note{font-size:12px;color:var(--ink-3);font-weight:600}
+@media(max-width:640px){.expinput{max-width:190px}}
+
+/* ===== 참고자료 아코디언 — 넘버링을 섹션(01~09)과 좌측 정렬 통일 ===== */
+details.acc{
+  background:transparent;border:none;border-radius:0;box-shadow:none;
+  border-top:1px solid var(--border);margin-bottom:0;overflow:visible;
+}
+details.acc[open]{box-shadow:none}
+details.acc > summary{padding:20px 0}
+details.acc > summary:hover{background:transparent}
+details.acc > summary:hover .acc-title{color:var(--accent-2)}
+.acc-title{transition:color .15s}
+.acc-body{padding:0 0 28px}
+@media(max-width:640px){
+  details.acc > summary{padding:16px 0}
+  .acc-body{padding:0 0 20px}
+}
 </style>
 </head>
 <body>
 
+<div class="app-shell">
 <header>
   <div class="head-in">
     <span class="eyebrow">TRAVEL PLAN REPORT · v1.0</span>
@@ -418,27 +597,38 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
   </div>
 </header>
 
+<div class="view-toggle-wrap">
+  <div class="view-toggle" role="tablist" aria-label="여행 상태">
+    <button class="vt-btn" data-mode="during" role="tab">✈️ 여행 중</button>
+    <button class="vt-btn" data-mode="pre" role="tab">🧳 여행 전 / 후</button>
+  </div>
+  <div class="view-toggle vt-solo" role="tablist" aria-label="예산 보기">
+    <button class="vt-btn" data-mode="budget" role="tab">💰 예산</button>
+  </div>
+</div>
+
 <nav>
   <div class="nav-in">
-    <a href="#summary">요약</a>
-    <a href="#money">💱 환율</a>
-    <a href="#status">준비 현황</a>
-    <a href="#itinerary">일정</a>
-    <a href="#driving">운전</a>
-    <a href="#tenir">테니르</a>
-    <a href="#packing">패킹</a>
-    <a href="#contacts">연락처</a>
+    <div class="nav-inner">
+    <a href="#summary" data-phase="pre">요약</a>
+    <a href="#money" data-phase="during">💱 환율</a>
+    <a href="#status" data-phase="pre">준비 현황</a>
+    <a href="#itinerary" data-phase="during">일정</a>
+    <a href="#driving" data-phase="during">운전</a>
+    <a href="#tenir" data-phase="during">테니르</a>
+    <a href="#packing" data-phase="pre">패킹</a>
+    <a href="#contacts" data-phase="during">연락처</a>
     <a href="#places">명소</a>
     <a href="#food">미식</a>
     <a href="#shopping">쇼핑</a>
-    <a href="#prep">준비물</a>
+    </div>
   </div>
 </nav>
 
 <div class="container">
 
 <!-- ============ SUMMARY ============ -->
-<section id="summary">
+<section id="summary" data-phase="pre">
   <div class="sec-title"><span class="sec-num">01</span><h2>Executive Summary</h2></div>
   <p class="sec-desc">여행 전체 구조와 핵심 지표 요약</p>
 
@@ -448,7 +638,7 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
     <p>남은 리스크는 <b>Day 6 고도 순응</b> 하나로 좁혀졌다. 일정 문제가 아닌 당일 컨디션 관리 이슈이며, 도착일 트레킹·음주를 가볍게 유지하면 해소된다.</p>
   </div>
 
-  <div class="grid g4">
+  <div class="grid g4 stats">
     <div class="kpi">
       <div class="label">총 일정</div>
       <div class="val">9<span class="unit">박 10일</span></div>
@@ -473,38 +663,14 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
 </section>
 
 <!-- ============ MONEY ============ -->
-<section id="money">
+<section id="money" data-phase="during">
   <div class="sec-title"><span class="sec-num">02</span><h2>환전 &amp; 결제 계획</h2></div>
   <p class="sec-desc">$1 ≈ 470텡게(KZT) · $1 ≈ 88솜(KGS) — 2026.07 기준, 출발 전 재확인</p>
 
   <!-- 환율 위젯 (실시간 + 계산기) -->
   <div class="card" style="margin-bottom:16px">
-    <h3><span class="ic">💱</span>실시간 환율 <span id="rateStatus" class="badge b-low" style="margin-left:4px">불러오는 중…</span></h3>
-
-    <div class="live-grid">
-      <div class="live-box kzt">
-        <div class="lb-flag">🇰🇿</div>
-        <div class="lb-body">
-          <div class="lb-name">카자흐스탄 텡게</div>
-          <div class="lb-main"><span id="liveKZT">—</span> <em>KZT</em></div>
-          <div class="lb-sub">1,000텡게 ≈ <b id="kztToKrw">—</b>원 · $1 기준</div>
-        </div>
-      </div>
-      <div class="live-box kgs">
-        <div class="lb-flag">🇰🇬</div>
-        <div class="lb-body">
-          <div class="lb-name">키르기스스탄 솜</div>
-          <div class="lb-main"><span id="liveKGS">—</span> <em>KGS</em></div>
-          <div class="lb-sub">1,000솜 ≈ <b id="kgsToKrw">—</b>원 · $1 기준</div>
-        </div>
-      </div>
-    </div>
-    <div class="live-meta">
-      <span id="rateTime">—</span>
-      <button id="rateReload" class="calc-chip" style="padding:5px 12px">↻ 새로고침</button>
-    </div>
-
-    <div class="calc-wrap" style="margin-top:18px;border-top:1px solid var(--border);padding-top:18px">
+    <!-- 금액 변환 (위) -->
+    <div class="calc-wrap">
       <div class="calc-row">
         <label class="calc-lbl">금액 변환</label>
         <div class="calc-input-row">
@@ -518,29 +684,52 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
         </div>
       </div>
       <div class="calc-out" id="calcOut"></div>
-      <div class="calc-quick">
-        <span class="calc-quick-lbl">자주 쓰는 금액</span>
-        <div class="calc-chips">
-          <button class="calc-chip" data-a="1000" data-c="KZT">1,000텡게</button>
-          <button class="calc-chip" data-a="50000" data-c="KZT">5만텡게(보증금)</button>
-          <button class="calc-chip" data-a="9000" data-c="KZT">9,000텡게(공항택시)</button>
-          <button class="calc-chip" data-a="500" data-c="KGS">500솜</button>
-          <button class="calc-chip" data-a="1700" data-c="KGS">1,700솜(배달)</button>
-          <button class="calc-chip" data-a="5220" data-c="KGS">5,220솜(반납)</button>
+
+      <!-- 수동 환율: 선택(클릭) 시에만 노출 -->
+      <div class="calc-rate">
+        <button type="button" class="calc-rate-toggle" id="manualToggle" aria-expanded="false" aria-controls="manualBody">
+          <span>수동 환율 설정</span><span class="mr-arrow">▾</span>
+        </button>
+        <div class="calc-rate-body" id="manualBody" hidden>
+          <span class="calc-rate-note">오프라인·API 실패 시 이 환율을 사용합니다</span>
+          <div class="calc-rate-row">
+            <label>$1 = <input type="number" id="rKZT" value="470" step="1" class="calc-mini"> 텡게</label>
+            <label>$1 = <input type="number" id="rKGS" value="88" step="0.5" class="calc-mini"> 솜</label>
+            <label>$1 = <input type="number" id="rKRW" value="1380" step="10" class="calc-mini"> 원</label>
+          </div>
         </div>
       </div>
-      <div class="calc-rate">
-        <span>수동 환율 (오프라인·API 실패 시 사용)</span>
-        <div class="calc-rate-row">
-          <label>$1 = <input type="number" id="rKZT" value="470" step="1" class="calc-mini"> 텡게</label>
-          <label>$1 = <input type="number" id="rKGS" value="88" step="0.5" class="calc-mini"> 솜</label>
-          <label>$1 = <input type="number" id="rKRW" value="1380" step="10" class="calc-mini"> 원</label>
+    </div>
+
+    <!-- 실시간 환율 (아래) -->
+    <div class="live-wrap">
+      <h3><span class="ic">💱</span>실시간 환율 <span id="rateStatus" class="badge b-low" style="margin-left:4px">불러오는 중…</span></h3>
+      <div class="live-grid">
+        <div class="live-box kzt">
+          <div class="lb-flag">🇰🇿</div>
+          <div class="lb-body">
+            <div class="lb-name">카자흐스탄 텡게</div>
+            <div class="lb-main"><span id="liveKZT">—</span> <em>KZT</em></div>
+            <div class="lb-sub">1,000텡게 ≈ <b id="kztToKrw">—</b>원 · $1 기준</div>
+          </div>
         </div>
+        <div class="live-box kgs">
+          <div class="lb-flag">🇰🇬</div>
+          <div class="lb-body">
+            <div class="lb-name">키르기스스탄 솜</div>
+            <div class="lb-main"><span id="liveKGS">—</span> <em>KGS</em></div>
+            <div class="lb-sub">1,000솜 ≈ <b id="kgsToKrw">—</b>원 · $1 기준</div>
+          </div>
+        </div>
+      </div>
+      <div class="live-meta">
+        <span id="rateTime">—</span>
+        <button id="rateReload" class="calc-chip" style="padding:5px 12px">↻ 새로고침</button>
       </div>
     </div>
   </div>
 
-  <div class="grid g3">
+  <div class="grid g3 stats">
     <div class="kpi">
       <div class="label">총 달러 준비</div>
       <div class="val">$1,000<span class="unit">내외</span></div>
@@ -562,10 +751,9 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
     <h4>💵 렌터카 결제 구조 <span class="badge b-done" style="margin-left:6px">확정</span></h4>
     <ul>
       <li><b>인수 시 총 600 USD</b> = 렌트비 300 + 보증금 300<span class="sub-note">렌트비 300은 카드 결제 가능 · 보증금 300은 반드시 현금</span></li>
-      <li><b>보증금 300 USD</b> — 반납 후 조건 충족 시 <b>현금 환급</b></li>
+      <li><b>보증금 300 USD</b> — 반납 후 조건 충족 시 <b>현금 환급</b><span class="sub-note">환급 조건(세차·진공·만탱크)과 미이행 시 불이익은 <b>Day 5 일정</b>에 상세</span></li>
       <li><b>호텔 배달 20 USD</b> (1,700솜) · <b>공항 반납 60 USD</b> (5,220솜) — 달러·솜 모두 가능</li>
-      <li><b>환급 조건</b> — 외부 세차 + 실내 진공청소 + 연료 만탱크 반납<span class="sub-note">미이행 시 청소비 2,500솜 차감 + 공항 현장 환급 불가(후일 경리부서 처리)</span></li>
-      <li>이미 온라인 결제 완료: 187,542원 (렌터카 66,591 + Trip.com 보험 120,951)</li>
+      <li>이미 온라인 결제 완료: <b>631,482원</b> (렌트 510,531 + TripCover 보험 120,951)<span class="sub-note">⚠️ 이전 문서엔 187,542원(렌트 66,591 + 보험 120,951)으로 기재 — 예약 시트 기준으로 갱신함. 렌트 금액 차이 443,940원은 <b>Trip.com 결제 내역에서 재확인 필요</b></span></li>
     </ul>
   </div>
 
@@ -595,8 +783,240 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
   </div>
 </section>
 
+<!-- ============ BUDGET ============ -->
+<section id="budget">
+  <div class="sec-title"><span class="sec-num">💰</span><h2>예산</h2></div>
+  <p class="sec-desc">사전 결제 완료분과 현지 지출 계획 — 일자별 <b>실제 지출</b>을 입력하면 총 여행비가 자동 계산됩니다</p>
+
+  <!-- ---------- 여행 전/후: 준비 예산 ---------- -->
+  <div data-phase="pre">
+    <div class="grid g4 stats">
+      <div class="kpi">
+        <div class="label">사전 결제 완료</div>
+        <div class="val">394<span class="unit">만원</span></div>
+        <div class="note">3,942,601원 · 항공+숙박+렌터카</div>
+      </div>
+      <div class="kpi">
+        <div class="label">숙박 (8박)</div>
+        <div class="val">228<span class="unit">만원</span></div>
+        <div class="note">2,284,319원 · 숙소 4곳</div>
+      </div>
+      <div class="kpi">
+        <div class="label">항공 (3구간)</div>
+        <div class="val">103<span class="unit">만원</span></div>
+        <div class="note">1,026,800원 + 마일리지 15만</div>
+      </div>
+      <div class="kpi">
+        <div class="label">렌터카</div>
+        <div class="val">63<span class="unit">만원</span></div>
+        <div class="note">631,482원 · 현장 비용 별도</div>
+      </div>
+    </div>
+
+    <div class="alert a-crit" style="margin-top:16px">
+      <h4>⏳ 무료 취소 마감 — 날짜 주의</h4>
+      <ul>
+        <li><b>테니르 에코 호텔 2박</b> — 9/8분 <b>8/30까지</b> · 9/9분 <b>8/31까지</b> 무료 취소<span class="sub-note">두 건 합계 1,076,610원 — 일정 변경 가능성이 있다면 이 날짜 전에 결정</span></li>
+        <li><b>Orien Hotel</b>(비슈케크) — <b>9/2 12:00까지</b> 무료 취소 (318,601원)</li>
+        <li><b>Kazakhstan Hotel 3건</b>(9/3·9/7·9/10) — <b>취소·환불 불가</b> (합계 642,075원)</li>
+      </ul>
+    </div>
+
+    <h3 style="font-size:15.5px;font-weight:800;margin:24px 0 12px">숙박 상세 <span class="badge b-done">결제 완료</span></h3>
+    <div class="wrap-table">
+      <table class="data">
+        <tr>
+          <th style="width:92px">날짜</th>
+          <th style="width:210px">숙소</th>
+          <th>예약처 · 번호 / 조건</th>
+          <th style="width:120px">금액</th>
+        </tr>
+        <tr>
+          <td data-label="날짜"><b>9/3</b><span class="sub-note">Day 1</span></td>
+          <td data-label="숙소"><b>Kazakhstan Hotel</b><span class="sub-note">알마티 · Dostyk 52/2</span></td>
+          <td data-label="예약">아고다 · 1744397548<span class="sub-note"><b>취소·환불 불가</b> · 조식 포함</span></td>
+          <td data-label="금액"><b>213,340원</b></td>
+        </tr>
+        <tr>
+          <td data-label="날짜"><b>9/4</b><span class="sub-note">Day 2</span></td>
+          <td data-label="숙소"><b>Orien Hotel</b><span class="sub-note">비슈케크 · +996 505 684 460</span></td>
+          <td data-label="예약">아고다 · 1744421091<span class="sub-note"><b>9/2 12:00까지 무료 취소</b> · 조식 포함</span></td>
+          <td data-label="금액"><b>318,601원</b></td>
+        </tr>
+        <tr>
+          <td data-label="날짜"><b>9/5–9/6</b><span class="sub-note">Day 3–4 · 2박</span></td>
+          <td data-label="숙소"><b>Tosor 게스트 스위트</b><span class="sub-note">이식쿨 남안</span></td>
+          <td data-label="예약">Airbnb<span class="sub-note">2박 합산 금액</span></td>
+          <td data-label="금액"><b>247,033원</b></td>
+        </tr>
+        <tr>
+          <td data-label="날짜"><b>9/7</b><span class="sub-note">Day 5</span></td>
+          <td data-label="숙소"><b>Kazakhstan Hotel</b><span class="sub-note">알마티</span></td>
+          <td data-label="예약">1749489042<span class="sub-note"><b>취소·환불 불가</b> · 조식 포함</span></td>
+          <td data-label="금액"><b>217,198원</b></td>
+        </tr>
+        <tr>
+          <td data-label="날짜"><b>9/8</b><span class="sub-note">Day 6</span></td>
+          <td data-label="숙소"><b>Tenir Eco Hotel</b><span class="sub-note">탈가르 패스 3,200m</span></td>
+          <td data-label="예약">아고다 · 1749477057<span class="sub-note"><b>8/30 전 무료 취소</b> · 조식 포함</span></td>
+          <td data-label="금액"><b>540,447원</b><span class="sub-note">$363.26</span></td>
+        </tr>
+        <tr>
+          <td data-label="날짜"><b>9/9</b><span class="sub-note">Day 7 · 연박</span></td>
+          <td data-label="숙소"><b>Tenir Eco Hotel</b><span class="sub-note">연박 — 예약 시트엔 '알마티 시내'로 표기</span></td>
+          <td data-label="예약">아고다 · 1749465440<span class="sub-note"><b>8/31 전 무료 취소</b> · 조식 포함</span></td>
+          <td data-label="금액"><b>536,163원</b><span class="sub-note">$360.38</span></td>
+        </tr>
+        <tr>
+          <td data-label="날짜"><b>9/10</b><span class="sub-note">Day 8</span></td>
+          <td data-label="숙소"><b>Kazakhstan Hotel</b><span class="sub-note">알마티</span></td>
+          <td data-label="예약">아고다 · 1749495265<span class="sub-note"><b>취소·환불 불가</b> · 조식 포함</span></td>
+          <td data-label="금액"><b>211,537원</b></td>
+        </tr>
+        <tr>
+          <td data-label="날짜"><b>합계</b></td>
+          <td data-label="숙소"><b>8박 · 4곳</b><span class="sub-note">9/11은 기내 1박 (9박 10일)</span></td>
+          <td data-label="예약">조식 전 숙소 포함</td>
+          <td data-label="금액"><b>2,284,319원</b></td>
+        </tr>
+      </table>
+    </div>
+
+    <h3 style="font-size:15.5px;font-weight:800;margin:24px 0 12px">항공 · 렌터카 <span class="badge b-done">결제 완료</span></h3>
+    <div class="wrap-table">
+      <table class="data">
+        <tr>
+          <th style="width:110px">결제일</th>
+          <th style="width:200px">항목</th>
+          <th>상세</th>
+          <th style="width:120px">금액</th>
+        </tr>
+        <tr>
+          <td data-label="결제일">2026.01.20</td>
+          <td data-label="항목"><b>아시아나</b><span class="sub-note">인천 ↔ 알마티</span></td>
+          <td data-label="상세">비즈니스 · <b>마일리지 15만 사용</b><span class="sub-note">현금 결제분은 유류할증료·세금</span></td>
+          <td data-label="금액"><b>343,800원</b></td>
+        </tr>
+        <tr>
+          <td data-label="결제일">2026.05.18</td>
+          <td data-label="항목"><b>Air Astana</b><span class="sub-note">알마티 ↔ 비슈케크</span></td>
+          <td data-label="상세">이코노미 · Day 2 / Day 5 구간</td>
+          <td data-label="금액"><b>683,000원</b></td>
+        </tr>
+        <tr>
+          <td data-label="결제일">2026.07.22</td>
+          <td data-label="항목"><b>렌터카</b><span class="sub-note">Nomad Car Rental</span></td>
+          <td data-label="상세">Trip.com · 예약번호 1400827886613371 · 26.09.04~07<span class="sub-note">렌트 510,531 + TripCover 보험 120,951 · <b>배달·반납·보증금은 현장 별도</b></span></td>
+          <td data-label="금액"><b>631,482원</b></td>
+        </tr>
+        <tr>
+          <td data-label="결제일"><b>합계</b></td>
+          <td data-label="항목"><b>항공 3구간 + 렌터카</b></td>
+          <td data-label="상세">숙박 2,284,319원 포함 시 <b>총 3,942,601원</b></td>
+          <td data-label="금액"><b>1,658,282원</b></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="alert a-info" style="margin-top:16px">
+      <h4>💵 출발 전 현금 준비</h4>
+      <ul>
+        <li><b>달러 $1,000 내외</b>(신권 $100권) — 여행비 $600 + 렌터카 $380<span class="sub-note">렌터카 $380은 별도 봉투로 분리 · 상세 환전 전략은 <b>여행 중</b> 모드의 환율 섹션 참고</span></li>
+        <li><b>렌터카 실지출은 $80</b> — 인수 시 낸 보증금 $300은 9/7 공항에서 현금 환급</li>
+        <li>숙소는 <b>전 곳 조식 포함</b> — 아침 식비는 예산에서 제외해도 됨</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ---------- 여행 중: 일자별 지출 ---------- -->
+  <div data-phase="during">
+    <div class="grid g3 stats">
+      <div class="kpi">
+        <div class="label">현지 지출 합계</div>
+        <div class="val"><span id="expTotal">0</span><span class="unit">원</span></div>
+        <div class="note">아래 입력한 실제 지출</div>
+      </div>
+      <div class="kpi">
+        <div class="label">사전 결제 완료</div>
+        <div class="val">394<span class="unit">만원</span></div>
+        <div class="note">3,942,601원 · 항공+숙박+렌터카</div>
+      </div>
+      <div class="kpi">
+        <div class="label">총 여행비</div>
+        <div class="val"><span id="grandTotal">394</span><span class="unit">만원</span></div>
+        <div class="note">사전 결제 + 현지 지출</div>
+      </div>
+    </div>
+
+    <div class="wrap-table" style="margin-top:16px">
+      <table class="data">
+        <tr>
+          <th style="width:110px">DAY</th>
+          <th>예상 지출 항목</th>
+          <th style="width:140px">실제 지출 (원)</th>
+        </tr>
+        <tr>
+          <td data-label="DAY"><b>Day 1</b><span class="sub-note">9/3 (목)</span></td>
+          <td data-label="예상 지출">공항 → 호텔 <b>Yandex Go 2,500~4,000텡게</b><span class="sub-note">백업: Blue Sky 공식 카운터 정액 9,000텡게 · 항공·숙박 선결제 완료</span></td>
+          <td data-label="실제 지출"><input type="number" class="expinput" data-day="1" min="0" step="1000" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td data-label="DAY"><b>Day 2</b><span class="sub-note">9/4 (금)</span></td>
+          <td data-label="예상 지출">마나스 공항 택시 <b>500~1,000솜</b> · NAVAT 저녁<span class="sub-note">플롭 1인 약 $8 · 샤슬릭 꼬치당 약 $4 · 생맥주 — 2인 기준으로 환산</span></td>
+          <td data-label="실제 지출"><input type="number" class="expinput" data-day="2" min="0" step="1000" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td data-label="DAY"><b>Day 3</b><span class="sub-note">9/5 (토)</span></td>
+          <td data-label="예상 지출"><b>렌터카 인수 600 USD</b> = 렌트비 300(카드) + 보증금 300(현금·환급) · <b>배달 20 USD</b>(1,700솜)<span class="sub-note">스카즈카 입장 2인 100솜 · Globus 2박 장보기 · 벨탐 점심 · 앗바쉬 꿀·펠트(선택)</span></td>
+          <td data-label="실제 지출"><input type="number" class="expinput" data-day="3" min="0" step="1000" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td data-label="DAY"><b>Day 4</b><span class="sub-note">9/6 (일)</span></td>
+          <td data-label="예상 지출">바르스콘 폭포 트레킹 · <b>셀프 쿠킹</b><span class="sub-note">Day 3 장보기분으로 해결 — 추가 지출 적음</span></td>
+          <td data-label="실제 지출"><input type="number" class="expinput" data-day="4" min="0" step="1000" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td data-label="DAY"><b>Day 5</b><span class="sub-note">9/7 (월)</span></td>
+          <td data-label="예상 지출">세차 <b>300~500솜</b> + 주유 만탱크 · <b>공항 반납 60 USD</b>(5,220솜)<span class="sub-note">💰 보증금 <b>300 USD 현금 환급(+)</b> · 알마티에서 5만 텡게 인출 · Magnum 장보기</span></td>
+          <td data-label="실제 지출"><input type="number" class="expinput" data-day="5" min="0" step="1000" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td data-label="DAY"><b>Day 6</b><span class="sub-note">9/8 (화)</span></td>
+          <td data-label="예상 지출">케이블카 왕복 — <b>Premium 요금제 포함(추가 0)</b><span class="sub-note">테니르 보증금 50,000텡게(Day 8 환급) · Shymbulak Yurt 점심 · 호텔 레스토랑 저녁</span></td>
+          <td data-label="실제 지출"><input type="number" class="expinput" data-day="6" min="0" step="1000" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td data-label="DAY"><b>Day 7</b><span class="sub-note">9/9 (수)</span></td>
+          <td data-label="예상 지출"><b>SNEG(Le Mont) 디너</b> · Syn 32 티타임 · 빙하 트레킹<span class="sub-note">산 위 정찬 — 현장 결제, 금액 미확정</span></td>
+          <td data-label="실제 지출"><input type="number" class="expinput" data-day="7" min="0" step="1000" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td data-label="DAY"><b>Day 8</b><span class="sub-note">9/10 (목)</span></td>
+          <td data-label="예상 지출">라하트 초콜릿 쇼핑 · <b>Auyl 파인다이닝</b> 저녁(Arba 와인 시음)<span class="sub-note">💰 테니르 보증금 <b>50,000텡게 환불(+)</b> → 후반 자금으로 재활용</span></td>
+          <td data-label="실제 지출"><input type="number" class="expinput" data-day="8" min="0" step="1000" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td data-label="DAY"><b>Day 9</b><span class="sub-note">9/11 (금)</span></td>
+          <td data-label="예상 지출">젤료니 바자르 견과·건과일 · <b>주류 4병 8~15만원</b>(꼬냑 2 + 와인 2)<span class="sub-note">공항 이동 · 면세 한도 1인 2병</span></td>
+          <td data-label="실제 지출"><input type="number" class="expinput" data-day="9" min="0" step="1000" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td data-label="DAY"><b>Day 10</b><span class="sub-note">9/12 (토)</span></td>
+          <td data-label="예상 지출">인천 도착 — 여행 종료</td>
+          <td data-label="실제 지출"><input type="number" class="expinput" data-day="10" min="0" step="1000" placeholder="0"></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="exp-foot">
+      <span class="exp-note">입력값은 이 브라우저에 자동 저장됩니다</span>
+      <button type="button" id="expReset" class="calc-chip">지출 기록 초기화</button>
+    </div>
+  </div>
+</section>
+
 <!-- ============ STATUS ============ -->
-<section id="status">
+<section id="status" data-phase="pre">
   <div class="sec-title"><span class="sec-num">03</span><h2>준비 현황 &amp; 남은 액션</h2></div>
   <p class="sec-desc">확정된 항목과 출발 전 처리할 작업</p>
 
@@ -671,13 +1091,13 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
       <li><b>D-30~7</b> — 국제운전면허 발급 · 여권 유효기간(6개월+) · 여행자보험(고산 트레킹 포함)</li>
       <li><b>D-14~7</b> — 달러 $600 환전(신권 $100권) · 트래블카드 KZT 지원 확인 · eSIM 구매</li>
       <li><b>D-7~3</b> — 앱 설치(2GIS · Yandex Go · 러시아어 오프라인 번역) · 구글맵 오프라인 저장 · 숙소 호스트 문의</li>
-      <li><b>D-3~1</b> — 예약 확인서 저장(항공 3건 · 숙소 4곳 · 렌터카) · 사본 촬영 · 긴급번호 저장</li>
+      <li><b>D-3~1</b> — 예약 확인서 저장(항공 3건 · 숙소 4곳 · 렌터카) · 여권·면허 사본 촬영(클라우드 백업) · <b>대사관·영사콜센터·카드 분실신고 번호 연락처 등록</b></li>
     </ul>
   </div>
 </section>
 
 <!-- ============ ITINERARY ============ -->
-<section id="itinerary">
+<section id="itinerary" data-phase="during">
   <div class="sec-title"><span class="sec-num">04</span><h2>일자별 일정</h2></div>
   <p class="sec-desc">
     <span class="badge b-acc">시차</span> 카자흐 한국−4h · 키르기스 한국−3h (두 나라 간 1시간 차) &nbsp;
@@ -807,7 +1227,7 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
 </section>
 
 <!-- ============ DRIVING ============ -->
-<section id="driving">
+<section id="driving" data-phase="during">
   <div class="sec-title"><span class="sec-num">05</span><h2>키르기스스탄 운전 가이드</h2></div>
   <p class="sec-desc">Day 3 비슈케크 → 토소르, Day 5 토소르 → 마나스 공항 · 편도 약 4~5시간 × 2일 · 우측통행 좌핸들(한국과 동일)</p>
 
@@ -866,7 +1286,7 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
 </section>
 
 <!-- ============ TENIR ============ -->
-<section id="tenir">
+<section id="tenir" data-phase="during">
   <div class="sec-title"><span class="sec-num">06</span><h2>테니르 에코 호텔 이동 가이드</h2></div>
   <p class="sec-desc">Kazakhstan Hotel → 탈가르 패스 3,200m · 접근 수단은 케이블카뿐 · 3구간 환승, 순수 탑승 약 45분</p>
 
@@ -916,9 +1336,10 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
 </section>
 
 <!-- ============ PACKING ============ -->
-<section id="packing">
+<section id="packing" data-phase="pre">
   <div class="sec-title"><span class="sec-num">07</span><h2>패킹 리스트 (2인)</h2></div>
-  <p class="sec-desc">빨래 없이 9박 · 남편 방한 강화 · Auyl은 세미캐주얼 기준 — 가방별로 담을 것</p>
+  <p class="sec-desc">빨래 없이 9박 · 남편 방한 강화 · Auyl은 세미캐주얼 기준 — 가방별로 담을 것<br>
+    <span class="badge b-acc">기온</span> 알마티·비슈케크 낮 22~27℃ / 밤 8~12℃ · <b>침블락 3,200m 밤 0℃ 안팎</b> — 일교차가 관건</p>
 
   <div class="alert a-info">
     <h4>📦 패킹 순서 — 3단계 재편성</h4>
@@ -975,7 +1396,8 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
         <li><b>헤드랜턴 or 손전등</b> — 이식쿨 별 관측·시골 밤길</li>
         <li>카메라·삼각대(별 사진 원하면) · 여분 메모리</li>
         <li>멀티탭(콘센트 부족 대비) <span class="sub-note">어댑터는 불필요 — 220V C/F형, 한국 플러그 그대로</span></li>
-        <li>eSIM 설치 완료 확인 또는 유심핀</li>
+        <li><b>eSIM 설치 완료 확인</b> 또는 유심핀 <span class="sub-note">현지 유심 시 — 카자흐 Beeline·Kcell / 키르기스 O!·Megacom</span></li>
+        <li><b>앱 미리 설치·오프라인 저장</b> — 2GIS(내비·상점 검색) · 구글맵 오프라인 · Yandex Go(택시) · 러시아어 번역</li>
       </ul>
     </div>
 
@@ -988,6 +1410,7 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
         <li><b>선크림(고산용 SPF50+)</b> · 립밤 · 고보습 크림 <span class="sub-note">3,200m 건조·자외선 대비</span></li>
         <li><b>핫팩 6~8개</b> — 남편분 넉넉히(3,200m 밤·일출 감상)</li>
         <li>멀미약(산길 커브 대비) · 벌레퇴치제</li>
+        <li><b>수돗물 음용 금지</b> — 생수 구입 <span class="sub-note">예민하면 양치도 생수로</span></li>
       </ul>
     </div>
 
@@ -1018,7 +1441,7 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
 </section>
 
 <!-- ============ CONTACTS ============ -->
-<section id="contacts">
+<section id="contacts" data-phase="during">
   <div class="sec-title"><span class="sec-num">08</span><h2>연락처 &amp; 안전</h2></div>
 
   <div class="grid g2">
@@ -1055,22 +1478,12 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
       </ul>
     </div>
 
-    <div class="card">
-      <h3><span class="ic">📋</span>출발 전 저장 목록</h3>
-      <ul class="list">
-        <li>여권 사본 · 면허 2종 사본 (휴대폰 사진 + 클라우드)</li>
-        <li>항공권 e-티켓 3건 · 숙소 바우처 4곳 · 렌터카 확인서</li>
-        <li>여행자보험 증서 &amp; 보험사 해외 긴급지원 번호</li>
-        <li>위 대사관·영사콜센터 번호 <b>연락처에 미리 등록</b></li>
-        <li>카드사 분실신고 번호 (해외 발신용)</li>
-      </ul>
-    </div>
   </div>
 </section>
 
 <div style="margin-top:64px;margin-bottom:16px">
   <div class="sec-title"><span class="sec-num">📚</span><h2>참고 자료</h2></div>
-  <p class="sec-desc">필요할 때 펼쳐 보세요 — 명소·미식·쇼핑·준비물 상세</p>
+  <p class="sec-desc">필요할 때 펼쳐 보세요 — 명소·미식·쇼핑 상세</p>
 </div>
 <!-- ============ PLACES ============ -->
 <details class="acc" id="places" open>
@@ -1248,63 +1661,6 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
   </div>
 </details>
 
-<!-- ============ PREP ============ -->
-<details class="acc" id="prep">
-  <summary>
-    <span class="acc-num">12</span>
-    <span class="acc-title">준비물 상세</span>
-    <span class="acc-desc">서류 · 옷차림 · 통신 · 건강</span>
-    <span class="acc-arrow">▾</span>
-  </summary>
-  <div class="acc-body">
-<div class="grid g2">
-    <div class="card">
-      <h3><span class="ic">🧳</span>짐 구성 전략 — 이원화</h3>
-      <ul class="list">
-        <li><b>큰 캐리어 ×2 (알마티 거점)</b> — 도시옷, Auyl용 세미 정장, 쇼핑 여유 공간 + 완충재<span class="sub-note">9/4~7, 9/8~10 두 번 호텔 무료 보관 — "캐리어는 알마티에 산다"</span></li>
-        <li><b>보조 더플/배낭 (원정 공용)</b> — 키르기스 3박 · 테니르 2박 재사용<span class="sub-note">키르기스 모드: 수영복·트레킹복·방한 겉옷 / 테니르 모드: 패딩·비니·장갑·핫팩·수영복</span></li>
-        <li><b>서류 파우치(기내)</b> — 여권, 면허 2종, e티켓, 바우처, 달러 현금</li>
-        <li><b>상비 파우치</b> — 두통약, 지사제, 소화제, 밴드, 립밤·보습제, 선크림</li>
-        <li><b>전자 파우치</b> — 보조배터리, 케이블, 차량 충전기, 헤드랜턴</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3><span class="ic">👕</span>옷차림 — 일교차가 관건</h3>
-      <ul class="list">
-        <li>9월 알마티·비슈케크: 낮 22~27℃ / 밤 8~12℃ — 레이어드</li>
-        <li><b>침블락 3,200m 2박</b>: 밤 0℃ 안팎 — 경량 패딩, 방풍자켓, 비니·장갑</li>
-        <li>트레킹화(협곡·폭포·빙하용) + 편한 운동화</li>
-        <li>수영복(이식쿨, 사우나) · 선글라스 · 챙 모자 · 선크림</li>
-        <li>파인다이닝(Auyl)용 세미 정장 한 벌</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3><span class="ic">📄</span>서류 · 통신</h3>
-      <ul class="list">
-        <li><b>여권</b> 유효기간 6개월 이상 — 양국 무비자</li>
-        <li><b>국제운전면허증 + 한국 면허 원본</b></li>
-        <li>항공권 e-티켓 · 숙소 바우처 4곳 · 렌터카 확인서 · 보험 증서</li>
-        <li><b>eSIM 또는 현지 유심</b> — 카자흐: Beeline·Kcell / 키르기스: O!·Megacom</li>
-        <li>오프라인 지도 <b>2GIS</b> + 구글맵 · <b>Yandex Go</b> · 러시아어 번역 앱</li>
-        <li>콘센트 220V 유럽식(C/F) — <b>한국 플러그 그대로 사용</b>, 어댑터 불필요</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3><span class="ic">💊</span>건강 · 고산 대비</h3>
-      <ul class="list">
-        <li><b>3,200m에서 2박</b> — 두통약, 충분한 수분, 첫날은 천천히<span class="sub-note">두통·메스꺼움 심하면 하산 · 고산 숙박 중 음주는 가볍게</span></li>
-        <li>상비약 — 지사제(물갈이), 소화제, 감기약, 밴드</li>
-        <li>수돗물 음용 금지 — 생수 구입(양치도 예민하면 생수)</li>
-        <li>헤드랜턴 — 이식쿨 별 관측 &amp; 시골 밤길</li>
-        <li>고산 자외선 매우 강함 — 선크림·선글라스 필수</li>
-      </ul>
-    </div>
-  </div>
-  </div>
-</details>
 
 <footer>
   <div class="t">카자흐스탄 · 키르기스스탄 9박 10일</div>
@@ -1312,6 +1668,7 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
 </footer>
 
 </div>
+</div><!-- /app-shell -->
 <script>
 (function(){
   var amt=document.getElementById('calcAmt'),
@@ -1432,18 +1789,19 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
   var toTop=document.getElementById('toTop');
 
   function onScroll(){
-    var cur=null;
-    sections.forEach(function(s){
+    var cur=null, vis=sections.filter(function(s){return s.el.offsetParent!==null;});
+    vis.forEach(function(s){
       if(s.el.getBoundingClientRect().top<=140) cur=s;
     });
-    // 페이지 하단에 도달하면 마지막 섹션을 활성화 (하단에 몰린 참고자료 대응)
-    if(window.innerHeight+window.scrollY >= document.body.scrollHeight-2){
-      cur=sections[sections.length-1];
+    // 페이지 하단에 도달하면 마지막(표시 중) 섹션을 활성화
+    if(vis.length && window.innerHeight+window.scrollY >= document.body.scrollHeight-2){
+      cur=vis[vis.length-1];
     }
     navLinks.forEach(function(a){a.classList.remove('active');});
     if(cur) cur.a.classList.add('active');
     if(toTop){ toTop.classList.toggle('show', window.scrollY>500); }
   }
+  window.__spy=onScroll;
   window.addEventListener('scroll',onScroll,{passive:true});
   window.addEventListener('resize',onScroll);
   onScroll();
@@ -1510,6 +1868,85 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
     });
     refresh();
   }
+})();
+</script>
+
+<script>
+/* ===== 뷰 모드: 여행 중 / 여행 전·후 (여행 기간엔 '여행 중'이 기본) ===== */
+(function(){
+  var btns=[].slice.call(document.querySelectorAll('.vt-btn'));
+  if(!btns.length) return;
+  var start=new Date(2026,8,3), end=new Date(2026,8,12); // 9월=month 8
+  var n=new Date(), today=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+  var inTrip=(today.getTime()>=start.getTime() && today.getTime()<=end.getTime());
+  function apply(mode){
+    document.body.classList.remove('mode-during','mode-pre','mode-budget');
+    document.body.classList.add('mode-'+mode);
+    btns.forEach(function(b){
+      var on=b.getAttribute('data-mode')===mode;
+      b.classList.toggle('active',on);
+      b.setAttribute('aria-selected',on?'true':'false');
+    });
+    if(typeof window.__spy==='function') window.__spy();
+  }
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      apply(b.getAttribute('data-mode'));
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+  apply(inTrip ? 'during' : 'pre');
+})();
+</script>
+
+<script>
+/* ===== 예산: 일자별 지출 기록 (브라우저 저장) ===== */
+(function(){
+  var inputs=[].slice.call(document.querySelectorAll('.expinput'));
+  if(!inputs.length) return;
+  var PREPAID=3942601, KEY='kzt_expenses_v1';
+  var totEl=document.getElementById('expTotal'),
+      grandEl=document.getElementById('grandTotal'),
+      resetBtn=document.getElementById('expReset');
+
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ return {}; } }
+  function save(o){ try{ localStorage.setItem(KEY, JSON.stringify(o)); }catch(e){} }
+
+  function refresh(){
+    var sum=0;
+    inputs.forEach(function(i){ var v=parseFloat(i.value); if(isFinite(v)&&v>0) sum+=v; });
+    if(totEl) totEl.textContent=Math.round(sum).toLocaleString('ko-KR');
+    if(grandEl) grandEl.textContent=Math.round((PREPAID+sum)/10000).toLocaleString('ko-KR');
+  }
+
+  var st=load();
+  inputs.forEach(function(i){
+    var d=i.getAttribute('data-day');
+    if(st[d]!=null && st[d]!=='') i.value=st[d];
+    i.addEventListener('input',function(){
+      var o=load(); o[d]=i.value; save(o); refresh();
+    });
+  });
+
+  if(resetBtn) resetBtn.addEventListener('click',function(){
+    inputs.forEach(function(i){ i.value=''; });
+    save({}); refresh();
+  });
+
+  refresh();
+})();
+</script>
+
+<script>
+/* ===== 수동 환율: 클릭 시에만 펼침 ===== */
+(function(){
+  var t=document.getElementById('manualToggle'), body=document.getElementById('manualBody');
+  if(!t||!body) return;
+  t.addEventListener('click',function(){
+    var willOpen=body.hasAttribute('hidden');
+    if(willOpen){ body.removeAttribute('hidden'); } else { body.setAttribute('hidden',''); }
+    t.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+  });
 })();
 </script>
 </body>
