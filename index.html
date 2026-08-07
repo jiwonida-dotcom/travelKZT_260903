@@ -187,6 +187,37 @@ ul.list li b{font-weight:700}
 .a-info h4{color:#2563EB}
 .a-info li::before{background:var(--blue)}
 
+
+/* ---------- 아코디언 ---------- */
+details.acc{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  margin-bottom:12px;overflow:hidden;
+}
+details.acc > summary{
+  list-style:none;cursor:pointer;padding:20px 24px;
+  display:flex;align-items:center;gap:12px;user-select:none;
+}
+details.acc > summary::-webkit-details-marker{display:none}
+details.acc > summary:hover{background:var(--bg)}
+.acc-num{
+  width:26px;height:26px;border-radius:8px;background:var(--accent-soft);color:var(--accent);
+  font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;
+}
+.acc-title{font-size:18px;font-weight:800;letter-spacing:-.02em}
+.acc-desc{font-size:13px;color:var(--ink-3);margin-left:auto;text-align:right}
+@media(max-width:620px){.acc-desc{display:none}}
+.acc-arrow{
+  flex:none;width:20px;height:20px;color:var(--ink-3);
+  transition:transform .18s;font-size:13px;display:flex;align-items:center;justify-content:center;
+}
+details.acc[open] .acc-arrow{transform:rotate(180deg)}
+.acc-body{padding:0 24px 24px}
+@media(max-width:640px){
+  details.acc > summary{padding:16px 18px}
+  .acc-body{padding:0 18px 18px}
+  .acc-title{font-size:16px}
+}
+
 /* ---------- footer ---------- */
 footer{
   margin-top:80px;padding-top:28px;border-top:1px solid var(--border);
@@ -348,14 +379,13 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
 
 <nav>
   <div class="nav-in">
-    <a href="#summary">요약</a>
+    <a href="#money">💱 환율</a>
     <a href="#status">준비 현황</a>
     <a href="#itinerary">일정</a>
     <a href="#driving">운전</a>
-    <a href="#tenir">테니르 이동</a>
-    <a href="#prep">준비물</a>
+    <a href="#tenir">테니르</a>
     <a href="#packing">패킹</a>
-    <a href="#money">환전</a>
+    <a href="#contacts">연락처</a>
     <a href="#places">명소</a>
     <a href="#food">미식</a>
     <a href="#shopping">쇼핑</a>
@@ -399,9 +429,132 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
   </div>
 </section>
 
+<!-- ============ MONEY ============ -->
+<section id="money">
+  <div class="sec-title"><span class="sec-num">02</span><h2>환전 &amp; 결제 계획</h2></div>
+  <p class="sec-desc">$1 ≈ 470텡게(KZT) · $1 ≈ 88솜(KGS) — 2026.07 기준, 출발 전 재확인</p>
+
+  <!-- 환율 위젯 (실시간 + 계산기) -->
+  <div class="card" style="margin-bottom:16px">
+    <h3><span class="ic">💱</span>실시간 환율 <span id="rateStatus" class="badge b-low" style="margin-left:4px">불러오는 중…</span></h3>
+
+    <div class="live-grid">
+      <div class="live-box kzt">
+        <div class="lb-flag">🇰🇿</div>
+        <div class="lb-body">
+          <div class="lb-name">카자흐스탄 텡게</div>
+          <div class="lb-main"><span id="liveKZT">—</span> <em>KZT</em></div>
+          <div class="lb-sub">1,000텡게 ≈ <b id="kztToKrw">—</b>원 · $1 기준</div>
+        </div>
+      </div>
+      <div class="live-box kgs">
+        <div class="lb-flag">🇰🇬</div>
+        <div class="lb-body">
+          <div class="lb-name">키르기스스탄 솜</div>
+          <div class="lb-main"><span id="liveKGS">—</span> <em>KGS</em></div>
+          <div class="lb-sub">1,000솜 ≈ <b id="kgsToKrw">—</b>원 · $1 기준</div>
+        </div>
+      </div>
+    </div>
+    <div class="live-meta">
+      <span id="rateTime">—</span>
+      <button id="rateReload" class="calc-chip" style="padding:5px 12px">↻ 새로고침</button>
+    </div>
+
+    <div class="calc-wrap" style="margin-top:18px;border-top:1px solid var(--border);padding-top:18px">
+      <div class="calc-row">
+        <label class="calc-lbl">금액 변환</label>
+        <div class="calc-input-row">
+          <input type="number" id="calcAmt" value="10000" min="0" step="100" class="calc-input">
+          <select id="calcCur" class="calc-sel">
+            <option value="KZT">텡게 (KZT)</option>
+            <option value="KGS">솜 (KGS)</option>
+            <option value="KRW">원화 (KRW)</option>
+            <option value="USD">달러 (USD)</option>
+          </select>
+        </div>
+      </div>
+      <div class="calc-out" id="calcOut"></div>
+      <div class="calc-quick">
+        <span class="calc-quick-lbl">자주 쓰는 금액</span>
+        <div class="calc-chips">
+          <button class="calc-chip" data-a="1000" data-c="KZT">1,000텡게</button>
+          <button class="calc-chip" data-a="50000" data-c="KZT">5만텡게(보증금)</button>
+          <button class="calc-chip" data-a="9000" data-c="KZT">9,000텡게(공항택시)</button>
+          <button class="calc-chip" data-a="500" data-c="KGS">500솜</button>
+          <button class="calc-chip" data-a="1700" data-c="KGS">1,700솜(배달)</button>
+          <button class="calc-chip" data-a="5220" data-c="KGS">5,220솜(반납)</button>
+        </div>
+      </div>
+      <div class="calc-rate">
+        <span>수동 환율 (오프라인·API 실패 시 사용)</span>
+        <div class="calc-rate-row">
+          <label>$1 = <input type="number" id="rKZT" value="470" step="1" class="calc-mini"> 텡게</label>
+          <label>$1 = <input type="number" id="rKGS" value="88" step="0.5" class="calc-mini"> 솜</label>
+          <label>$1 = <input type="number" id="rKRW" value="1380" step="10" class="calc-mini"> 원</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid g3">
+    <div class="kpi">
+      <div class="label">총 달러 준비</div>
+      <div class="val">$1,000<span class="unit">내외</span></div>
+      <div class="note">여행비 $600 + 렌터카 $380 (신권 위주)</div>
+    </div>
+    <div class="kpi">
+      <div class="label">렌터카 현금 (인수 시)</div>
+      <div class="val">$380</div>
+      <div class="note">보증금 300(환급) + 배달 20 + 반납 60</div>
+    </div>
+    <div class="kpi">
+      <div class="label">실지출 (렌터카 현금분)</div>
+      <div class="val">$80</div>
+      <div class="note">9/7 공항에서 $300 현금 환급</div>
+    </div>
+  </div>
+
+  <div class="alert a-crit" style="margin-top:16px">
+    <h4>💵 렌터카 결제 구조 <span class="badge b-done" style="margin-left:6px">확정</span></h4>
+    <ul>
+      <li><b>인수 시 총 600 USD</b> = 렌트비 300 + 보증금 300<span class="sub-note">렌트비 300은 카드 결제 가능 · 보증금 300은 반드시 현금</span></li>
+      <li><b>보증금 300 USD</b> — 반납 후 조건 충족 시 <b>현금 환급</b></li>
+      <li><b>호텔 배달 20 USD</b> (1,700솜) · <b>공항 반납 60 USD</b> (5,220솜) — 달러·솜 모두 가능</li>
+      <li><b>환급 조건</b> — 외부 세차 + 실내 진공청소 + 연료 만탱크 반납<span class="sub-note">미이행 시 청소비 2,500솜 차감 + 공항 현장 환급 불가(후일 경리부서 처리)</span></li>
+      <li>이미 온라인 결제 완료: 187,542원 (렌터카 66,591 + Trip.com 보험 120,951)</li>
+    </ul>
+  </div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card">
+      <h3><span class="ic">💱</span>환전 전략</h3>
+      <ul class="list">
+        <li><b>여행비 $600 배분</b> — 키르기스 $200(공항 $30 + 시내 $170) · 카자흐 $300~350(Day 5 저녁 환전) · 예비 $50~100 달러 보관</li>
+        <li><b>암산법</b> — 텡게 ×3 ≈ 원화(1만 텡게 ≈ 2.9만 원) · 솜 ×16 ≈ 원화(1,000솜 ≈ 1.6만 원)</li>
+        <li><b>공항은 최소만, 시내 환전소가 유리</b> — 훼손 없는 신권일수록 환율 좋음</li>
+        <li><b>Day 5 저녁 메인 환전</b> — 텡게가 실제 필요해지는 시점(보증금~Day 9)에 맞춤</li>
+        <li>테니르 <b>보증금 5만 텡게는 Day 8 환불</b> → 후반 여행 자금으로 재활용</li>
+        <li>남은 솜은 <b>Day 5 출국 전 소진/재환전</b> — 나라 밖에선 처분 불가</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ic">💳</span>카드 · ATM</h3>
+      <ul class="list">
+        <li>도시에서는 카드 결제 원활 — <b>이식쿨 남안은 현금 전용</b></li>
+        <li><b>카자흐</b> — 공항·시내 ATM 인출 가능(KZT 지원 여부 앱에서 사전 확인)</li>
+        <li><b>키르기스</b> — <b>Optima Bank ATM</b> 권장, 비슈케크에서만 가능</li>
+        <li><b>DCC 주의</b> — 화면에 원화 결제 뜨면 반드시 <b>"Without Conversion"</b>(현지통화) 선택</li>
+        <li>현금 필요처: 주유(시골), 시장, 팁, 테니르 보증금, 스카즈카 입장료</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- ============ STATUS ============ -->
 <section id="status">
-  <div class="sec-title"><span class="sec-num">02</span><h2>준비 현황 &amp; 남은 액션</h2></div>
+  <div class="sec-title"><span class="sec-num">03</span><h2>준비 현황 &amp; 남은 액션</h2></div>
   <p class="sec-desc">확정된 항목과 출발 전 처리할 작업</p>
 
   <div class="wrap-table">
@@ -477,7 +630,7 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
 
 <!-- ============ ITINERARY ============ -->
 <section id="itinerary">
-  <div class="sec-title"><span class="sec-num">03</span><h2>일자별 일정</h2></div>
+  <div class="sec-title"><span class="sec-num">04</span><h2>일자별 일정</h2></div>
   <p class="sec-desc">
     <span class="badge b-acc">시차</span> 카자흐 한국−4h · 키르기스 한국−3h (두 나라 간 1시간 차) &nbsp;
     <span class="badge b-acc">일출·일몰</span> 알마티 05:30/18:10 · 비슈케크 06:30/19:25 · 이식쿨 06:25/19:15
@@ -605,7 +758,7 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
 
 <!-- ============ DRIVING ============ -->
 <section id="driving">
-  <div class="sec-title"><span class="sec-num">04</span><h2>키르기스스탄 운전 가이드</h2></div>
+  <div class="sec-title"><span class="sec-num">05</span><h2>키르기스스탄 운전 가이드</h2></div>
   <p class="sec-desc">Day 3 비슈케크 → 토소르, Day 5 토소르 → 마나스 공항 · 편도 약 4~5시간 × 2일 · 우측통행 좌핸들(한국과 동일)</p>
 
   <div class="alert a-crit">
@@ -664,7 +817,7 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
 
 <!-- ============ TENIR ============ -->
 <section id="tenir">
-  <div class="sec-title"><span class="sec-num">05</span><h2>테니르 에코 호텔 이동 가이드</h2></div>
+  <div class="sec-title"><span class="sec-num">06</span><h2>테니르 에코 호텔 이동 가이드</h2></div>
   <p class="sec-desc">Kazakhstan Hotel → 탈가르 패스 3,200m · 접근 수단은 케이블카뿐 · 3구간 환승, 순수 탑승 약 45분</p>
 
   <div class="wrap-table">
@@ -707,59 +860,6 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
         <li>산 위 식당은 이른 오후 마감, 호텔 레스토랑도 21시 마감 — 간식 지참</li>
         <li>봄·가을 곤돌라 정기 점검 휴장 — 출발 전 공식 운행 일정 확인</li>
         <li>고산 3,200m — 몸 상태 안 좋으면 하산 결정 빠르게</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PREP ============ -->
-<section id="prep">
-  <div class="sec-title"><span class="sec-num">06</span><h2>준비물 &amp; 짐 구성</h2></div>
-  <p class="sec-desc">캐리어는 알마티에 두 번 맡기고, 배낭 하나로 두 번의 미니 원정</p>
-
-  <div class="grid g2">
-    <div class="card">
-      <h3><span class="ic">🧳</span>짐 구성 전략 — 이원화</h3>
-      <ul class="list">
-        <li><b>큰 캐리어 ×2 (알마티 거점)</b> — 도시옷, Auyl용 세미 정장, 쇼핑 여유 공간 + 완충재<span class="sub-note">9/4~7, 9/8~10 두 번 호텔 무료 보관 — "캐리어는 알마티에 산다"</span></li>
-        <li><b>보조 더플/배낭 (원정 공용)</b> — 키르기스 3박 · 테니르 2박 재사용<span class="sub-note">키르기스 모드: 수영복·트레킹복·방한 겉옷 / 테니르 모드: 패딩·비니·장갑·핫팩·수영복</span></li>
-        <li><b>서류 파우치(기내)</b> — 여권, 면허 2종, e티켓, 바우처, 달러 현금</li>
-        <li><b>상비 파우치</b> — 두통약, 지사제, 소화제, 밴드, 립밤·보습제, 선크림</li>
-        <li><b>전자 파우치</b> — 보조배터리, 케이블, 차량 충전기, 헤드랜턴</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3><span class="ic">👕</span>옷차림 — 일교차가 관건</h3>
-      <ul class="list">
-        <li>9월 알마티·비슈케크: 낮 22~27℃ / 밤 8~12℃ — 레이어드</li>
-        <li><b>침블락 3,200m 2박</b>: 밤 0℃ 안팎 — 경량 패딩, 방풍자켓, 비니·장갑</li>
-        <li>트레킹화(협곡·폭포·빙하용) + 편한 운동화</li>
-        <li>수영복(이식쿨, 사우나) · 선글라스 · 챙 모자 · 선크림</li>
-        <li>파인다이닝(Auyl)용 세미 정장 한 벌</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3><span class="ic">📄</span>서류 · 통신</h3>
-      <ul class="list">
-        <li><b>여권</b> 유효기간 6개월 이상 — 양국 무비자</li>
-        <li><b>국제운전면허증 + 한국 면허 원본</b></li>
-        <li>항공권 e-티켓 · 숙소 바우처 4곳 · 렌터카 확인서 · 보험 증서</li>
-        <li><b>eSIM 또는 현지 유심</b> — 카자흐: Beeline·Kcell / 키르기스: O!·Megacom</li>
-        <li>오프라인 지도 <b>2GIS</b> + 구글맵 · <b>Yandex Go</b> · 러시아어 번역 앱</li>
-        <li>콘센트 220V 유럽식(C/F) — <b>한국 플러그 그대로 사용</b>, 어댑터 불필요</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3><span class="ic">💊</span>건강 · 고산 대비</h3>
-      <ul class="list">
-        <li><b>3,200m에서 2박</b> — 두통약, 충분한 수분, 첫날은 천천히<span class="sub-note">두통·메스꺼움 심하면 하산 · 고산 숙박 중 음주는 가볍게</span></li>
-        <li>상비약 — 지사제(물갈이), 소화제, 감기약, 밴드</li>
-        <li>수돗물 음용 금지 — 생수 구입(양치도 예민하면 생수)</li>
-        <li>헤드랜턴 — 이식쿨 별 관측 &amp; 시골 밤길</li>
-        <li>고산 자외선 매우 강함 — 선크림·선글라스 필수</li>
       </ul>
     </div>
   </div>
@@ -867,135 +967,71 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
   </div>
 </section>
 
-<!-- ============ MONEY ============ -->
-<section id="money">
-  <div class="sec-title"><span class="sec-num">08</span><h2>환전 &amp; 결제 계획</h2></div>
-  <p class="sec-desc">$1 ≈ 470텡게(KZT) · $1 ≈ 88솜(KGS) — 2026.07 기준, 출발 전 재확인</p>
+<!-- ============ CONTACTS ============ -->
+<section id="contacts">
+  <div class="sec-title"><span class="sec-num">08</span><h2>연락처 &amp; 안전</h2></div>
 
-  <!-- 환율 위젯 (실시간 + 계산기) -->
-  <div class="card" style="margin-bottom:16px">
-    <h3><span class="ic">💱</span>실시간 환율 <span id="rateStatus" class="badge b-low" style="margin-left:4px">불러오는 중…</span></h3>
-
-    <div class="live-grid">
-      <div class="live-box kzt">
-        <div class="lb-flag">🇰🇿</div>
-        <div class="lb-body">
-          <div class="lb-name">카자흐스탄 텡게</div>
-          <div class="lb-main"><span id="liveKZT">—</span> <em>KZT</em></div>
-          <div class="lb-sub">1,000텡게 ≈ <b id="kztToKrw">—</b>원 · $1 기준</div>
-        </div>
-      </div>
-      <div class="live-box kgs">
-        <div class="lb-flag">🇰🇬</div>
-        <div class="lb-body">
-          <div class="lb-name">키르기스스탄 솜</div>
-          <div class="lb-main"><span id="liveKGS">—</span> <em>KGS</em></div>
-          <div class="lb-sub">1,000솜 ≈ <b id="kgsToKrw">—</b>원 · $1 기준</div>
-        </div>
-      </div>
-    </div>
-    <div class="live-meta">
-      <span id="rateTime">—</span>
-      <button id="rateReload" class="calc-chip" style="padding:5px 12px">↻ 새로고침</button>
-    </div>
-
-    <div class="calc-wrap" style="margin-top:18px;border-top:1px solid var(--border);padding-top:18px">
-      <div class="calc-row">
-        <label class="calc-lbl">금액 변환</label>
-        <div class="calc-input-row">
-          <input type="number" id="calcAmt" value="10000" min="0" step="100" class="calc-input">
-          <select id="calcCur" class="calc-sel">
-            <option value="KZT">텡게 (KZT)</option>
-            <option value="KGS">솜 (KGS)</option>
-            <option value="KRW">원화 (KRW)</option>
-            <option value="USD">달러 (USD)</option>
-          </select>
-        </div>
-      </div>
-      <div class="calc-out" id="calcOut"></div>
-      <div class="calc-quick">
-        <span class="calc-quick-lbl">자주 쓰는 금액</span>
-        <div class="calc-chips">
-          <button class="calc-chip" data-a="1000" data-c="KZT">1,000텡게</button>
-          <button class="calc-chip" data-a="50000" data-c="KZT">5만텡게(보증금)</button>
-          <button class="calc-chip" data-a="9000" data-c="KZT">9,000텡게(공항택시)</button>
-          <button class="calc-chip" data-a="500" data-c="KGS">500솜</button>
-          <button class="calc-chip" data-a="1700" data-c="KGS">1,700솜(배달)</button>
-          <button class="calc-chip" data-a="5220" data-c="KGS">5,220솜(반납)</button>
-        </div>
-      </div>
-      <div class="calc-rate">
-        <span>수동 환율 (오프라인·API 실패 시 사용)</span>
-        <div class="calc-rate-row">
-          <label>$1 = <input type="number" id="rKZT" value="470" step="1" class="calc-mini"> 텡게</label>
-          <label>$1 = <input type="number" id="rKGS" value="88" step="0.5" class="calc-mini"> 솜</label>
-          <label>$1 = <input type="number" id="rKRW" value="1380" step="10" class="calc-mini"> 원</label>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid g3">
-    <div class="kpi">
-      <div class="label">총 달러 준비</div>
-      <div class="val">$1,000<span class="unit">내외</span></div>
-      <div class="note">여행비 $600 + 렌터카 $380 (신권 위주)</div>
-    </div>
-    <div class="kpi">
-      <div class="label">렌터카 현금 (인수 시)</div>
-      <div class="val">$380</div>
-      <div class="note">보증금 300(환급) + 배달 20 + 반납 60</div>
-    </div>
-    <div class="kpi">
-      <div class="label">실지출 (렌터카 현금분)</div>
-      <div class="val">$80</div>
-      <div class="note">9/7 공항에서 $300 현금 환급</div>
-    </div>
-  </div>
-
-  <div class="alert a-crit" style="margin-top:16px">
-    <h4>💵 렌터카 결제 구조 <span class="badge b-done" style="margin-left:6px">확정</span></h4>
-    <ul>
-      <li><b>인수 시 총 600 USD</b> = 렌트비 300 + 보증금 300<span class="sub-note">렌트비 300은 카드 결제 가능 · 보증금 300은 반드시 현금</span></li>
-      <li><b>보증금 300 USD</b> — 반납 후 조건 충족 시 <b>현금 환급</b></li>
-      <li><b>호텔 배달 20 USD</b> (1,700솜) · <b>공항 반납 60 USD</b> (5,220솜) — 달러·솜 모두 가능</li>
-      <li><b>환급 조건</b> — 외부 세차 + 실내 진공청소 + 연료 만탱크 반납<span class="sub-note">미이행 시 청소비 2,500솜 차감 + 공항 현장 환급 불가(후일 경리부서 처리)</span></li>
-      <li>이미 온라인 결제 완료: 187,542원 (렌터카 66,591 + Trip.com 보험 120,951)</li>
-    </ul>
-  </div>
-
-  <div class="grid g2" style="margin-top:16px">
+  <div class="grid g2">
     <div class="card">
-      <h3><span class="ic">💱</span>환전 전략</h3>
+      <h3><span class="ic">🇰🇷</span>재외공관 · 영사 긴급</h3>
       <ul class="list">
-        <li><b>여행비 $600 배분</b> — 키르기스 $200(공항 $30 + 시내 $170) · 카자흐 $300~350(Day 5 저녁 환전) · 예비 $50~100 달러 보관</li>
-        <li><b>암산법</b> — 텡게 ×3 ≈ 원화(1만 텡게 ≈ 2.9만 원) · 솜 ×16 ≈ 원화(1,000솜 ≈ 1.6만 원)</li>
-        <li><b>공항은 최소만, 시내 환전소가 유리</b> — 훼손 없는 신권일수록 환율 좋음</li>
-        <li><b>Day 5 저녁 메인 환전</b> — 텡게가 실제 필요해지는 시점(보증금~Day 9)에 맞춤</li>
-        <li>테니르 <b>보증금 5만 텡게는 Day 8 환불</b> → 후반 여행 자금으로 재활용</li>
-        <li>남은 솜은 <b>Day 5 출국 전 소진/재환전</b> — 나라 밖에선 처분 불가</li>
+        <li><b>영사안전콜센터 (서울, 24시간)</b> — <b>+82-2-3210-0404</b><span class="sub-note">근무시간 외 사건사고 접수 및 일반 영사 상담 · 스마트폰에 '영사안전콜센터 무료전화' 앱 설치하면 무료</span></li>
+        <li><b>주키르기즈공화국 대사관</b> (비슈케크)<span class="sub-note">대표전화(근무시간) +996-312-57-00-55<br>긴급전화(근무시간 외) +996-500-579-773</span></li>
+        <li><b>주카자흐스탄 대사관</b> (아스타나)<span class="sub-note">영사업무 +7-7172-572-100 / 572-200<br><b>사건사고(알마티 지역) +7-777-705-6634</b> ← 우리 여행지 담당</span></li>
+        <li><b>주알마티 대한민국 총영사관</b><span class="sub-note">알마티 체류 중 영사 민원은 이쪽 — 방문 전 홈페이지에서 위치·업무시간 확인</span></li>
+        <li>업무시간 09:00~12:30, 13:30~18:00 (월–금)<span class="sub-note">현지에서 +7 대신 8을 눌러 발신 가능(카자흐스탄)</span></li>
       </ul>
     </div>
 
     <div class="card">
-      <h3><span class="ic">💳</span>카드 · ATM</h3>
+      <h3><span class="ic">📞</span>현지 · 숙소 연락처</h3>
       <ul class="list">
-        <li>도시에서는 카드 결제 원활 — <b>이식쿨 남안은 현금 전용</b></li>
-        <li><b>카자흐</b> — 공항·시내 ATM 인출 가능(KZT 지원 여부 앱에서 사전 확인)</li>
-        <li><b>키르기스</b> — <b>Optima Bank ATM</b> 권장, 비슈케크에서만 가능</li>
-        <li><b>DCC 주의</b> — 화면에 원화 결제 뜨면 반드시 <b>"Without Conversion"</b>(현지통화) 선택</li>
-        <li>현금 필요처: 주유(시골), 시장, 팁, 테니르 보증금, 스카즈카 입장료</li>
+        <li><b>Kazakhstan Hotel</b> — 리셉션 +7 727 291 91 01 (24h) · WhatsApp +7 775 069 34 67</li>
+        <li><b>Tenir Eco Hotel</b> — WhatsApp +7 700 313 14 15</li>
+        <li><b>긴급전화</b> — 키르기스스탄 <b>112</b> (경찰·구급 통합)</li>
+        <li>렌터카 업체 긴급 연락처 저장 (WhatsApp)</li>
+        <li>Orien Hotel(비슈케크) · 토소르 에어비앤비 호스트 연락처</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ic">🛡</span>안전 · 문화</h3>
+      <ul class="list">
+        <li>공항 호객 택시 대신 <b>공식 데스크 또는 Yandex Go</b></li>
+        <li>시장·번화가 소매치기 주의 · 밤늦은 인적 드문 골목 피하기</li>
+        <li><b>군사시설·국경·검문소 사진 촬영 금지</b></li>
+        <li>이슬람 문화권 — 모스크 방문 시 복장 단정히</li>
+        <li>고급 식당 서비스료 10% 포함 여부 확인, 팁은 필수 아님</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="ic">📋</span>출발 전 저장 목록</h3>
+      <ul class="list">
+        <li>여권 사본 · 면허 2종 사본 (휴대폰 사진 + 클라우드)</li>
+        <li>항공권 e-티켓 3건 · 숙소 바우처 4곳 · 렌터카 확인서</li>
+        <li>여행자보험 증서 &amp; 보험사 해외 긴급지원 번호</li>
+        <li>위 대사관·영사콜센터 번호 <b>연락처에 미리 등록</b></li>
+        <li>카드사 분실신고 번호 (해외 발신용)</li>
       </ul>
     </div>
   </div>
 </section>
 
+<div style="margin-top:64px;margin-bottom:16px">
+  <div class="sec-title"><span class="sec-num">📚</span><h2>참고 자료</h2></div>
+  <p class="sec-desc">필요할 때 펼쳐 보세요 — 명소·미식·쇼핑·준비물 상세</p>
+</div>
 <!-- ============ PLACES ============ -->
-<section id="places">
-  <div class="sec-title"><span class="sec-num">09</span><h2>이식쿨 호수 명소</h2></div>
-  <p class="sec-desc">람사르 습지로 지정된 청정 호수 — 남안 토소르 중심</p>
-
-  <div class="grid g3">
+<details class="acc" id="places">
+  <summary>
+    <span class="acc-num">09</span>
+    <span class="acc-title">이식쿨 호수 명소</span>
+    <span class="acc-desc">바르스콘 · 스카즈카 · 토소르 해변</span>
+    <span class="acc-arrow">▾</span>
+  </summary>
+  <div class="acc-body">
+<div class="grid g3">
     <div class="card">
       <h3><span class="ic">💧</span>바르스콘 폭포</h3>
       <ul class="list">
@@ -1030,14 +1066,19 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
       <li>두 곳 모두 토소르에서 동선이 벌어져 시간 여유 있을 때만 — SUV로 만나는 풍경 자체가 명소</li>
     </ul>
   </div>
-</section>
+  </div>
+</details>
 
 <!-- ============ FOOD ============ -->
-<section id="food">
-  <div class="sec-title"><span class="sec-num">10</span><h2>필수 미식 가이드</h2></div>
-  <p class="sec-desc">두 나라는 유목 민족의 뿌리를 공유해 대표 음식의 결이 비슷하다</p>
-
-  <div class="wrap-table">
+<details class="acc" id="food">
+  <summary>
+    <span class="acc-num">10</span>
+    <span class="acc-title">필수 미식 가이드</span>
+    <span class="acc-desc">플롭 · 샤슬릭 · 베쉬바르막 외</span>
+    <span class="acc-arrow">▾</span>
+  </summary>
+  <div class="acc-body">
+<div class="wrap-table">
     <table class="data">
       <tr><th style="width:190px">요리</th><th>설명</th><th style="width:170px">참고</th></tr>
       <tr>
@@ -1067,14 +1108,19 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
       </tr>
     </table>
   </div>
-</section>
+  </div>
+</details>
 
 <!-- ============ SHOPPING ============ -->
-<section id="shopping">
-  <div class="sec-title"><span class="sec-num">11</span><h2>동선 맞춤 쇼핑</h2></div>
-  <p class="sec-desc">들르는 순서대로 — 퀄리티 높은 것만 엄선</p>
-
-  <div class="grid g3">
+<details class="acc" id="shopping">
+  <summary>
+    <span class="acc-num">11</span>
+    <span class="acc-title">동선 맞춤 쇼핑</span>
+    <span class="acc-desc">꿀 · 펠트 · 와인 · 꼬냑 · 면세</span>
+    <span class="acc-arrow">▾</span>
+  </summary>
+  <div class="acc-body">
+<div class="grid g3">
     <div class="card">
       <h3><span class="ic">🍯</span>키르기스스탄 (Day 3~4)</h3>
       <ul class="list">
@@ -1149,58 +1195,66 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
       <li>시내 구매 주류·꿀 유리병은 위탁수하물에 옷으로 완충 포장</li>
     </ul>
   </div>
-</section>
+  </div>
+</details>
 
-<!-- ============ CONTACTS ============ -->
-<section id="contacts">
-  <div class="sec-title"><span class="sec-num">12</span><h2>연락처 &amp; 안전</h2></div>
-
-  <div class="grid g2">
+<!-- ============ PREP ============ -->
+<details class="acc" id="prep">
+  <summary>
+    <span class="acc-num">12</span>
+    <span class="acc-title">준비물 상세</span>
+    <span class="acc-desc">서류 · 옷차림 · 통신 · 건강</span>
+    <span class="acc-arrow">▾</span>
+  </summary>
+  <div class="acc-body">
+<div class="grid g2">
     <div class="card">
-      <h3><span class="ic">🇰🇷</span>재외공관 · 영사 긴급</h3>
+      <h3><span class="ic">🧳</span>짐 구성 전략 — 이원화</h3>
       <ul class="list">
-        <li><b>영사안전콜센터 (서울, 24시간)</b> — <b>+82-2-3210-0404</b><span class="sub-note">근무시간 외 사건사고 접수 및 일반 영사 상담 · 스마트폰에 '영사안전콜센터 무료전화' 앱 설치하면 무료</span></li>
-        <li><b>주키르기즈공화국 대사관</b> (비슈케크)<span class="sub-note">대표전화(근무시간) +996-312-57-00-55<br>긴급전화(근무시간 외) +996-500-579-773</span></li>
-        <li><b>주카자흐스탄 대사관</b> (아스타나)<span class="sub-note">영사업무 +7-7172-572-100 / 572-200<br><b>사건사고(알마티 지역) +7-777-705-6634</b> ← 우리 여행지 담당</span></li>
-        <li><b>주알마티 대한민국 총영사관</b><span class="sub-note">알마티 체류 중 영사 민원은 이쪽 — 방문 전 홈페이지에서 위치·업무시간 확인</span></li>
-        <li>업무시간 09:00~12:30, 13:30~18:00 (월–금)<span class="sub-note">현지에서 +7 대신 8을 눌러 발신 가능(카자흐스탄)</span></li>
+        <li><b>큰 캐리어 ×2 (알마티 거점)</b> — 도시옷, Auyl용 세미 정장, 쇼핑 여유 공간 + 완충재<span class="sub-note">9/4~7, 9/8~10 두 번 호텔 무료 보관 — "캐리어는 알마티에 산다"</span></li>
+        <li><b>보조 더플/배낭 (원정 공용)</b> — 키르기스 3박 · 테니르 2박 재사용<span class="sub-note">키르기스 모드: 수영복·트레킹복·방한 겉옷 / 테니르 모드: 패딩·비니·장갑·핫팩·수영복</span></li>
+        <li><b>서류 파우치(기내)</b> — 여권, 면허 2종, e티켓, 바우처, 달러 현금</li>
+        <li><b>상비 파우치</b> — 두통약, 지사제, 소화제, 밴드, 립밤·보습제, 선크림</li>
+        <li><b>전자 파우치</b> — 보조배터리, 케이블, 차량 충전기, 헤드랜턴</li>
       </ul>
     </div>
 
     <div class="card">
-      <h3><span class="ic">📞</span>현지 · 숙소 연락처</h3>
+      <h3><span class="ic">👕</span>옷차림 — 일교차가 관건</h3>
       <ul class="list">
-        <li><b>Kazakhstan Hotel</b> — 리셉션 +7 727 291 91 01 (24h) · WhatsApp +7 775 069 34 67</li>
-        <li><b>Tenir Eco Hotel</b> — WhatsApp +7 700 313 14 15</li>
-        <li><b>긴급전화</b> — 키르기스스탄 <b>112</b> (경찰·구급 통합)</li>
-        <li>렌터카 업체 긴급 연락처 저장 (WhatsApp)</li>
-        <li>Orien Hotel(비슈케크) · 토소르 에어비앤비 호스트 연락처</li>
+        <li>9월 알마티·비슈케크: 낮 22~27℃ / 밤 8~12℃ — 레이어드</li>
+        <li><b>침블락 3,200m 2박</b>: 밤 0℃ 안팎 — 경량 패딩, 방풍자켓, 비니·장갑</li>
+        <li>트레킹화(협곡·폭포·빙하용) + 편한 운동화</li>
+        <li>수영복(이식쿨, 사우나) · 선글라스 · 챙 모자 · 선크림</li>
+        <li>파인다이닝(Auyl)용 세미 정장 한 벌</li>
       </ul>
     </div>
 
     <div class="card">
-      <h3><span class="ic">🛡</span>안전 · 문화</h3>
+      <h3><span class="ic">📄</span>서류 · 통신</h3>
       <ul class="list">
-        <li>공항 호객 택시 대신 <b>공식 데스크 또는 Yandex Go</b></li>
-        <li>시장·번화가 소매치기 주의 · 밤늦은 인적 드문 골목 피하기</li>
-        <li><b>군사시설·국경·검문소 사진 촬영 금지</b></li>
-        <li>이슬람 문화권 — 모스크 방문 시 복장 단정히</li>
-        <li>고급 식당 서비스료 10% 포함 여부 확인, 팁은 필수 아님</li>
+        <li><b>여권</b> 유효기간 6개월 이상 — 양국 무비자</li>
+        <li><b>국제운전면허증 + 한국 면허 원본</b></li>
+        <li>항공권 e-티켓 · 숙소 바우처 4곳 · 렌터카 확인서 · 보험 증서</li>
+        <li><b>eSIM 또는 현지 유심</b> — 카자흐: Beeline·Kcell / 키르기스: O!·Megacom</li>
+        <li>오프라인 지도 <b>2GIS</b> + 구글맵 · <b>Yandex Go</b> · 러시아어 번역 앱</li>
+        <li>콘센트 220V 유럽식(C/F) — <b>한국 플러그 그대로 사용</b>, 어댑터 불필요</li>
       </ul>
     </div>
 
     <div class="card">
-      <h3><span class="ic">📋</span>출발 전 저장 목록</h3>
+      <h3><span class="ic">💊</span>건강 · 고산 대비</h3>
       <ul class="list">
-        <li>여권 사본 · 면허 2종 사본 (휴대폰 사진 + 클라우드)</li>
-        <li>항공권 e-티켓 3건 · 숙소 바우처 4곳 · 렌터카 확인서</li>
-        <li>여행자보험 증서 &amp; 보험사 해외 긴급지원 번호</li>
-        <li>위 대사관·영사콜센터 번호 <b>연락처에 미리 등록</b></li>
-        <li>카드사 분실신고 번호 (해외 발신용)</li>
+        <li><b>3,200m에서 2박</b> — 두통약, 충분한 수분, 첫날은 천천히<span class="sub-note">두통·메스꺼움 심하면 하산 · 고산 숙박 중 음주는 가볍게</span></li>
+        <li>상비약 — 지사제(물갈이), 소화제, 감기약, 밴드</li>
+        <li>수돗물 음용 금지 — 생수 구입(양치도 예민하면 생수)</li>
+        <li>헤드랜턴 — 이식쿨 별 관측 &amp; 시골 밤길</li>
+        <li>고산 자외선 매우 강함 — 선크림·선글라스 필수</li>
       </ul>
     </div>
   </div>
-</section>
+  </div>
+</details>
 
 <footer>
   <div class="t">카자흐스탄 · 키르기스스탄 9박 10일</div>
