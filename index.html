@@ -654,33 +654,62 @@ body.mode-budget #budget{margin-top:28px}
   }
   #budget .stats.g3 .kpi{flex-wrap:wrap}
 
-  /* 예산 표 — 카드형 스택에서 금액을 우측 정렬·강조 */
-  #budget table.data tr{padding:14px 16px;position:relative}
+  /* 예산 표 — 카드형 스택 (컴팩트 레이아웃) */
+  #budget table.data tr{padding:16px 18px;position:relative}
+
+  /* 날짜·DAY — 한 줄 배지 */
+  #budget table.data td[data-label="날짜"],
+  #budget table.data td[data-label="DAY"],
+  #budget table.data td[data-label="결제일"]{
+    display:inline-flex;align-items:baseline;gap:6px;
+    background:var(--accent-soft);color:var(--accent);
+    padding:5px 11px;border-radius:999px;
+    font-size:12px;font-weight:700;margin-bottom:12px;
+  }
+  #budget table.data td[data-label="날짜"] .sub-note,
+  #budget table.data td[data-label="DAY"] .sub-note,
+  #budget table.data td[data-label="결제일"] .sub-note{
+    display:inline;margin-top:0;font-size:11px;color:#8478D8;font-weight:600;
+  }
+  #budget table.data td[data-label="날짜"]::before,
+  #budget table.data td[data-label="DAY"]::before,
+  #budget table.data td[data-label="결제일"]::before{display:none}
+
+  /* 숙소·항목명 — 카드 제목처럼 */
+  #budget table.data td[data-label="숙소"],
+  #budget table.data td[data-label="항목"]{
+    font-size:16px;font-weight:800;letter-spacing:-.01em;margin-top:0;
+  }
+  #budget table.data td[data-label="숙소"]::before,
+  #budget table.data td[data-label="항목"]::before{display:none}
+  #budget table.data td[data-label="숙소"] .sub-note,
+  #budget table.data td[data-label="항목"] .sub-note{
+    font-size:12px;font-weight:500;margin-top:3px;
+  }
+
+  /* 예약·상세 — 작게 */
+  #budget table.data td[data-label="예약"],
+  #budget table.data td[data-label="상세"]{
+    font-size:13px;color:var(--ink-2);margin-top:8px;
+  }
+  #budget table.data td[data-label="예약"]::before,
+  #budget table.data td[data-label="상세"]::before{
+    font-size:10px;letter-spacing:.04em;margin-bottom:2px;
+  }
+
+  /* 금액 — 우측 정렬 강조 */
   #budget table.data td[data-label="금액"]{
-    margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);
-    font-size:16px;font-weight:800;color:var(--accent);
+    margin-top:12px;padding-top:11px;border-top:1px dashed var(--border);
+    font-size:17px;font-weight:800;color:var(--accent);
     display:flex;justify-content:space-between;align-items:baseline;
   }
   #budget table.data td[data-label="금액"]::before{
     color:var(--ink-3);font-size:11px;font-weight:700;margin-bottom:0;
   }
-  /* 날짜·DAY는 상단 배지처럼 */
-  #budget table.data td[data-label="날짜"],
-  #budget table.data td[data-label="DAY"],
-  #budget table.data td[data-label="결제일"]{
-    display:inline-block;background:var(--accent-soft);color:var(--accent);
-    padding:4px 10px;border-radius:8px;font-size:12px;font-weight:700;
-    margin-bottom:8px;
-  }
-  #budget table.data td[data-label="날짜"]::before,
-  #budget table.data td[data-label="DAY"]::before,
-  #budget table.data td[data-label="결제일"]::before{display:none}
-  /* 숙소·항목명 강조 */
-  #budget table.data td[data-label="숙소"],
-  #budget table.data td[data-label="항목"]{font-size:15px;font-weight:700}
-  /* 지출 입력칸 — 넓게 + 우측 정렬 */
-  #budget table.data td[data-label="실제 지출"]{
-    margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);
+
+  /* 지출 입력칸 */
+  #budget table.data td[data-label="간이 메모"]{
+    margin-top:12px;padding-top:11px;border-top:1px dashed var(--border);
   }
   #budget .expinput{
     max-width:none;width:100%;padding:12px 14px;font-size:17px;
