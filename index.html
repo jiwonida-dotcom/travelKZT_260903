@@ -748,14 +748,23 @@ body.mode-budget #budget{margin-top:28px}
     font-size:10px;letter-spacing:.04em;margin-bottom:2px;
   }
 
-  /* 금액 — 우측 정렬 강조 */
+  /* 금액 — 라벨 좌측 / 원화 우측 끝 고정 */
   #budget table.data td[data-label="금액"]{
     margin-top:12px;padding-top:11px;border-top:1px dashed var(--border);
+    display:grid;grid-template-columns:auto 1fr;align-items:baseline;
+    column-gap:10px;
     font-size:17px;font-weight:800;color:var(--accent);
-    display:flex;justify-content:space-between;align-items:baseline;
+    text-align:right;
   }
   #budget table.data td[data-label="금액"]::before{
     color:var(--ink-3);font-size:11px;font-weight:700;margin-bottom:0;
+    text-align:left;grid-column:1;
+  }
+  #budget table.data td[data-label="금액"] b{grid-column:2;justify-self:end}
+  /* 달러 병기 — 원화 아래 우측 */
+  #budget table.data td[data-label="금액"] .sub-note{
+    grid-column:2;justify-self:end;
+    margin-top:2px;font-size:12px;font-weight:600;color:var(--ink-3);
   }
 
   /* 지출 입력칸 */
