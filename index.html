@@ -556,6 +556,79 @@ body.mode-budget #budget{margin-top:28px}
 .exp-note{font-size:12px;color:var(--ink-3);font-weight:600}
 @media(max-width:640px){.expinput{max-width:190px}}
 
+/* ---------- 예산 하단 고정 합계 바 (모바일) ---------- */
+#budgetBar{
+  display:none;
+  position:fixed;left:0;right:0;bottom:0;z-index:60;
+  background:rgba(255,255,255,.96);backdrop-filter:blur(10px);
+  border-top:1px solid var(--border);
+  padding:11px 16px calc(11px + env(safe-area-inset-bottom));
+  align-items:center;gap:14px;
+  box-shadow:0 -3px 16px rgba(0,0,0,.06);
+}
+#budgetBar .bb-item{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+#budgetBar .bb-lbl{font-size:10.5px;font-weight:700;color:var(--ink-3);letter-spacing:.02em}
+#budgetBar .bb-val{font-size:17px;font-weight:800;letter-spacing:-.02em;color:var(--ink);white-space:nowrap}
+#budgetBar .bb-total .bb-val{color:var(--accent)}
+#budgetBar .bb-div{width:1px;height:26px;background:var(--border);flex:none}
+@media(max-width:640px){
+  body.mode-budget #budgetBar{display:flex}
+  body.mode-budget{padding-bottom:74px}
+  body.mode-budget #toTop{bottom:86px}
+}
+
+/* ---------- 예산 섹션 모바일 최적화 ---------- */
+@media(max-width:640px){
+  /* 예산 KPI — 2열 유지하되 숫자 강조 */
+  #budget .stats.g4{grid-template-columns:repeat(2,1fr);gap:10px}
+  #budget .stats.g3{grid-template-columns:1fr;gap:10px}
+  #budget .stats.g3 .kpi{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:14px 16px;
+  }
+  #budget .stats.g3 .kpi .label{margin-bottom:0;font-size:12.5px}
+  #budget .stats.g3 .kpi .val{font-size:21px;text-align:right;white-space:nowrap}
+  #budget .stats.g3 .kpi .note{
+    display:block;width:100%;font-size:11px;margin-top:4px;
+    flex-basis:100%;order:3;text-align:left;
+  }
+  #budget .stats.g3 .kpi{flex-wrap:wrap}
+
+  /* 예산 표 — 카드형 스택에서 금액을 우측 정렬·강조 */
+  #budget table.data tr{padding:14px 16px;position:relative}
+  #budget table.data td[data-label="금액"]{
+    margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);
+    font-size:16px;font-weight:800;color:var(--accent);
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  #budget table.data td[data-label="금액"]::before{
+    color:var(--ink-3);font-size:11px;font-weight:700;margin-bottom:0;
+  }
+  /* 날짜·DAY는 상단 배지처럼 */
+  #budget table.data td[data-label="날짜"],
+  #budget table.data td[data-label="DAY"],
+  #budget table.data td[data-label="결제일"]{
+    display:inline-block;background:var(--accent-soft);color:var(--accent);
+    padding:4px 10px;border-radius:8px;font-size:12px;font-weight:700;
+    margin-bottom:8px;
+  }
+  #budget table.data td[data-label="날짜"]::before,
+  #budget table.data td[data-label="DAY"]::before,
+  #budget table.data td[data-label="결제일"]::before{display:none}
+  /* 숙소·항목명 강조 */
+  #budget table.data td[data-label="숙소"],
+  #budget table.data td[data-label="항목"]{font-size:15px;font-weight:700}
+  /* 지출 입력칸 — 넓게 + 우측 정렬 */
+  #budget table.data td[data-label="실제 지출"]{
+    margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);
+  }
+  #budget .expinput{
+    max-width:none;width:100%;padding:12px 14px;font-size:17px;
+    text-align:right;border-radius:12px;
+  }
+  #budget table.data td[data-label="예상 지출"]{font-size:13.5px;color:var(--ink-2)}
+}
+
 /* ===== 참고자료 아코디언 — 넘버링을 섹션(01~09)과 좌측 정렬 통일 ===== */
 details.acc{
   background:transparent;border:none;border-radius:0;box-shadow:none;
@@ -954,8 +1027,7 @@ details.acc > summary:hover .acc-title{color:var(--accent-2)}
           <th style="width:110px">DAY</th>
           <th>예상 지출 항목</th>
           <th style="width:140px">실제 지출 (원)</th>
-        </tr>
-        <tr>
+        </tr>        <tr>
           <td data-label="DAY"><b>Day 1</b><span class="sub-note">9/3 (목)</span></td>
           <td data-label="예상 지출">공항 → 호텔 <b>Yandex Go 2,500~4,000텡게</b><span class="sub-note">백업: Blue Sky 공식 카운터 정액 9,000텡게 · 항공·숙박 선결제 완료</span></td>
           <td data-label="실제 지출"><input type="number" class="expinput" data-day="1" min="0" step="1000" placeholder="0"></td>
@@ -1804,6 +1876,18 @@ details.acc > summary:hover .acc-title{color:var(--accent-2)}
 
 <button id="toTop" aria-label="맨 위로" title="맨 위로">↑</button>
 
+<div id="budgetBar" aria-hidden="true">
+  <div class="bb-item">
+    <span class="bb-lbl">현지 지출</span>
+    <span class="bb-val"><span id="bbExp">0</span>원</span>
+  </div>
+  <div class="bb-div"></div>
+  <div class="bb-item bb-total">
+    <span class="bb-lbl">총 여행비</span>
+    <span class="bb-val"><span id="bbTotal">394</span>만원</span>
+  </div>
+</div>
+
 <script>
 /* ===== UX 개선: 스크롤스파이 · 맨 위로 · 오늘 일정 · 준비 체크리스트 ===== */
 (function(){
@@ -1944,6 +2028,9 @@ details.acc > summary:hover .acc-title{color:var(--accent-2)}
     inputs.forEach(function(i){ var v=parseFloat(i.value); if(isFinite(v)&&v>0) sum+=v; });
     if(totEl) totEl.textContent=Math.round(sum).toLocaleString('ko-KR');
     if(grandEl) grandEl.textContent=Math.round((PREPAID+sum)/10000).toLocaleString('ko-KR');
+    var bbE=document.getElementById('bbExp'), bbT=document.getElementById('bbTotal');
+    if(bbE) bbE.textContent=Math.round(sum).toLocaleString('ko-KR');
+    if(bbT) bbT.textContent=Math.round((PREPAID+sum)/10000).toLocaleString('ko-KR');
   }
 
   var st=load();
