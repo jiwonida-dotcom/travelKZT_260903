@@ -706,7 +706,7 @@ body.mode-budget #budget{margin-top:28px}
   #budget .stats.g3 .kpi{flex-wrap:wrap}
 
   /* 예산 표 — 카드형 스택 (컴팩트 레이아웃) */
-  #budget table.data tr{padding:16px 18px;position:relative}
+  #budget table.data tr{padding:16px 18px 15px;position:relative}
 
   /* 날짜·DAY — 한 줄 배지 */
   #budget table.data td[data-label="날짜"],
@@ -715,7 +715,7 @@ body.mode-budget #budget{margin-top:28px}
     display:inline-flex;align-items:baseline;gap:6px;
     background:var(--accent-soft);color:var(--accent);
     padding:5px 11px;border-radius:999px;
-    font-size:12px;font-weight:700;margin-bottom:12px;
+    font-size:12px;font-weight:700;margin-bottom:11px;
   }
   #budget table.data td[data-label="날짜"] .sub-note,
   #budget table.data td[data-label="DAY"] .sub-note,
@@ -735,22 +735,31 @@ body.mode-budget #budget{margin-top:28px}
   #budget table.data td[data-label="항목"]::before{display:none}
   #budget table.data td[data-label="숙소"] .sub-note,
   #budget table.data td[data-label="항목"] .sub-note{
-    font-size:12px;font-weight:500;margin-top:3px;
+    font-size:12px;font-weight:500;margin-top:4px;color:var(--ink-3);
   }
 
-  /* 예약·상세 — 작게 */
+  /* 예약·상세 — 라벨 없이 컴팩트하게 */
   #budget table.data td[data-label="예약"],
   #budget table.data td[data-label="상세"]{
-    font-size:13px;color:var(--ink-2);margin-top:8px;
+    font-size:13px;color:var(--ink-2);margin-top:10px;
   }
   #budget table.data td[data-label="예약"]::before,
-  #budget table.data td[data-label="상세"]::before{
-    font-size:10px;letter-spacing:.04em;margin-bottom:2px;
+  #budget table.data td[data-label="상세"]::before{display:none}
+  #budget table.data td[data-label="예약"] .sub-note,
+  #budget table.data td[data-label="상세"] .sub-note{
+    margin-top:7px;font-size:12px;color:var(--ink-3);
   }
+  /* 취소 조건 — 의미별 배지 */
+  #budget .cx-ok,#budget .cx-no{
+    display:inline-block;padding:3px 9px;border-radius:7px;
+    font-size:11px;font-weight:700;margin-right:5px;
+  }
+  #budget .cx-ok{background:var(--green-bg);color:#059669}
+  #budget .cx-no{background:var(--gray-bg);color:#6B7280}
 
   /* 금액 — 라벨 좌측 / 원화 우측 끝 고정 */
   #budget table.data td[data-label="금액"]{
-    margin-top:12px;padding-top:11px;border-top:1px dashed var(--border);
+    margin-top:14px;padding-top:12px;border-top:1px dashed var(--border);
     display:grid;grid-template-columns:auto 1fr;align-items:baseline;
     column-gap:10px;
     font-size:17px;font-weight:800;color:var(--accent);
@@ -1050,7 +1059,7 @@ details.acc > summary:hover .acc-title{color:var(--accent-2)}
       <ul>
         <li><b>테니르 에코 호텔 2박</b> — 9/8분 <b>8/30까지</b> · 9/9분 <b>8/31까지</b> 무료 취소<span class="sub-note">두 건 합계 1,076,610원 — 일정 변경 가능성이 있다면 이 날짜 전에 결정</span></li>
         <li><b>Orien Hotel</b>(비슈케크) — <b>9/2 12:00까지</b> 무료 취소 (318,601원)</li>
-        <li><b>Kazakhstan Hotel 3건</b>(9/3·9/7·9/10) — <b>취소·환불 불가</b> (합계 642,075원)</li>
+        <li><b>Kazakhstan Hotel 3건</b>(9/3·9/7·9/10) — <b class="cx-no">취소·환불 불가</b> (합계 642,075원)</li>
       </ul>
     </div>
 
@@ -1066,13 +1075,13 @@ details.acc > summary:hover .acc-title{color:var(--accent-2)}
         <tr>
           <td data-label="날짜"><b>9/3</b><span class="sub-note">Day 1</span></td>
           <td data-label="숙소"><b>Kazakhstan Hotel</b><span class="sub-note">알마티 · Dostyk 52/2</span></td>
-          <td data-label="예약">아고다 · 1744397548<span class="sub-note"><b>취소·환불 불가</b> · 조식 포함</span></td>
+          <td data-label="예약">아고다 · 1744397548<span class="sub-note"><b class="cx-no">취소·환불 불가</b> · 조식 포함</span></td>
           <td data-label="금액"><b>213,340원</b></td>
         </tr>
         <tr>
           <td data-label="날짜"><b>9/4</b><span class="sub-note">Day 2</span></td>
           <td data-label="숙소"><b>Orien Hotel</b><span class="sub-note">비슈케크 · +996 505 684 460</span></td>
-          <td data-label="예약">아고다 · 1744421091<span class="sub-note"><b>9/2 12:00까지 무료 취소</b> · 조식 포함</span></td>
+          <td data-label="예약">아고다 · 1744421091<span class="sub-note"><b class="cx-ok">9/2 12:00까지 무료 취소</b> · 조식 포함</span></td>
           <td data-label="금액"><b>318,601원</b></td>
         </tr>
         <tr>
@@ -1084,25 +1093,25 @@ details.acc > summary:hover .acc-title{color:var(--accent-2)}
         <tr>
           <td data-label="날짜"><b>9/7</b><span class="sub-note">Day 5</span></td>
           <td data-label="숙소"><b>Kazakhstan Hotel</b><span class="sub-note">알마티</span></td>
-          <td data-label="예약">1749489042<span class="sub-note"><b>취소·환불 불가</b> · 조식 포함</span></td>
+          <td data-label="예약">1749489042<span class="sub-note"><b class="cx-no">취소·환불 불가</b> · 조식 포함</span></td>
           <td data-label="금액"><b>217,198원</b></td>
         </tr>
         <tr>
           <td data-label="날짜"><b>9/8</b><span class="sub-note">Day 6</span></td>
           <td data-label="숙소"><b>Tenir Eco Hotel</b><span class="sub-note">탈가르 패스 3,200m</span></td>
-          <td data-label="예약">아고다 · 1749477057<span class="sub-note"><b>8/30 전 무료 취소</b> · 조식 포함</span></td>
+          <td data-label="예약">아고다 · 1749477057<span class="sub-note"><b class="cx-ok">8/30 전 무료 취소</b> · 조식 포함</span></td>
           <td data-label="금액"><b>540,447원</b><span class="sub-note">$363.26</span></td>
         </tr>
         <tr>
           <td data-label="날짜"><b>9/9</b><span class="sub-note">Day 7 · 연박</span></td>
           <td data-label="숙소"><b>Tenir Eco Hotel</b><span class="sub-note">연박 — 예약 시트엔 '알마티 시내'로 표기</span></td>
-          <td data-label="예약">아고다 · 1749465440<span class="sub-note"><b>8/31 전 무료 취소</b> · 조식 포함</span></td>
+          <td data-label="예약">아고다 · 1749465440<span class="sub-note"><b class="cx-ok">8/31 전 무료 취소</b> · 조식 포함</span></td>
           <td data-label="금액"><b>536,163원</b><span class="sub-note">$360.38</span></td>
         </tr>
         <tr>
           <td data-label="날짜"><b>9/10</b><span class="sub-note">Day 8</span></td>
           <td data-label="숙소"><b>Kazakhstan Hotel</b><span class="sub-note">알마티</span></td>
-          <td data-label="예약">아고다 · 1749495265<span class="sub-note"><b>취소·환불 불가</b> · 조식 포함</span></td>
+          <td data-label="예약">아고다 · 1749495265<span class="sub-note"><b class="cx-no">취소·환불 불가</b> · 조식 포함</span></td>
           <td data-label="금액"><b>211,537원</b></td>
         </tr>
         <tr>
