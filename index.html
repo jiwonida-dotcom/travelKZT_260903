@@ -60,6 +60,7 @@ nav a{
   text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;
 }
 nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+nav a.active{color:var(--accent);border-bottom-color:var(--accent)}
 
 /* ---------- section ---------- */
 section{margin-top:64px;scroll-margin-top:60px}
@@ -351,6 +352,46 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
 @media print{
   nav{display:none}
   .day,.card,.kpi{break-inside:avoid}
+  #toTop,.task-progress{display:none}
+}
+
+/* ---------- 개선: 맨 위로 버튼 ---------- */
+#toTop{
+  position:fixed;right:20px;bottom:20px;z-index:40;
+  width:46px;height:46px;border-radius:50%;
+  border:1px solid var(--border);background:var(--surface);color:var(--accent);
+  font-size:19px;font-weight:800;cursor:pointer;
+  box-shadow:0 6px 22px rgba(24,24,27,.12);
+  opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;
+}
+#toTop:hover{transform:translateY(-2px)}
+#toTop.show{opacity:1;pointer-events:auto}
+@media(max-width:640px){#toTop{right:14px;bottom:14px;width:42px;height:42px}}
+
+/* ---------- 개선: 준비 진행률 ---------- */
+.task-progress{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:16px 20px;margin-bottom:16px;
+}
+.tp-head{display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;font-weight:700;color:var(--ink-2);margin-bottom:10px}
+.tp-head b{color:var(--accent);font-weight:800}
+.tp-head #taskCount{color:var(--accent);font-weight:800}
+.tp-track{height:9px;background:var(--bg);border-radius:99px;overflow:hidden}
+.tp-fill{height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--accent),#A78BFA);transition:width .35s ease}
+
+/* ---------- 개선: 준비항목 체크박스 ---------- */
+.chkbox{display:inline-flex;align-items:center;gap:9px;cursor:pointer}
+.chkbox input{width:18px;height:18px;accent-color:var(--accent);cursor:pointer;flex:none}
+tr.done-row td{opacity:.5;transition:opacity .2s}
+tr.done-row td[data-label="항목"] b{text-decoration:line-through}
+
+/* ---------- 개선: 오늘 일정 강조 ---------- */
+.day.today{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.today-flag{
+  font-size:11px;font-weight:800;color:#fff;background:var(--accent);
+  padding:4px 10px;border-radius:8px;letter-spacing:.02em;
 }
 </style>
 </head>
@@ -379,6 +420,7 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
 
 <nav>
   <div class="nav-in">
+    <a href="#summary">요약</a>
     <a href="#money">💱 환율</a>
     <a href="#status">준비 현황</a>
     <a href="#itinerary">일정</a>
@@ -389,6 +431,7 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
     <a href="#places">명소</a>
     <a href="#food">미식</a>
     <a href="#shopping">쇼핑</a>
+    <a href="#prep">준비물</a>
   </div>
 </nav>
 
@@ -557,6 +600,11 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
   <div class="sec-title"><span class="sec-num">03</span><h2>준비 현황 &amp; 남은 액션</h2></div>
   <p class="sec-desc">확정된 항목과 출발 전 처리할 작업</p>
 
+  <div class="task-progress">
+    <div class="tp-head"><span>남은 준비 진행률 <b id="taskPct">0%</b></span><span id="taskCount">0 / 6 완료</span></div>
+    <div class="tp-track"><div id="tpFill" class="tp-fill"></div></div>
+  </div>
+
   <div class="wrap-table">
     <table class="data">
       <tr>
@@ -585,32 +633,32 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
         <td data-label="내용"><b>300 USD 현금</b> — 반납 후 현금 환급 · 인수 시 총 600 USD(렌트비 300 카드 가능 + 보증금 300 현금)<span class="sub-note">업체가 600 USD 안내 후 300 USD로 정정 — Trip.com 확정서와 일치</span></td>
       </tr>
       <tr>
-        <td data-label="상태"><span class="badge b-todo">확인 필요</span></td>
+        <td data-label="상태"><label class="chkbox"><input type="checkbox" class="taskchk" data-id="t1"><span class="badge b-todo">확인 필요</span></label></td>
         <td data-label="항목"><b>계약 반영 여부</b></td>
         <td data-label="내용">확정서에 여전히 "9/4 16:00 Sky Plaza 사무실 인수·반납"으로 표기 — <b>호텔 배달·공항 반납이 계약에 등록됐는지 재확인</b></td>
       </tr>
       <tr>
-        <td data-label="상태"><span class="badge b-todo">확인 필요</span></td>
+        <td data-label="상태"><label class="chkbox"><input type="checkbox" class="taskchk" data-id="t2"><span class="badge b-todo">확인 필요</span></label></td>
         <td data-label="항목"><b>서류 전송</b></td>
         <td data-label="내용">렌트 전 여권 · 한국 면허(앞뒤) · 국제운전면허 사본 업체 전송 + 호텔 구글맵 핀</td>
       </tr>
       <tr>
-        <td data-label="상태"><span class="badge b-crit">필수</span></td>
+        <td data-label="상태"><label class="chkbox"><input type="checkbox" class="taskchk" data-id="t3"><span class="badge b-crit">필수</span></label></td>
         <td data-label="항목"><b>반납 조건</b></td>
         <td data-label="내용"><b>외부 세차 + 실내 진공청소 + 연료 만탱크</b> — Day 5 공항 도착 전 50분 확보<span class="sub-note">미이행 시 보증금 일시 보류 + 청소비 2,500솜 차감 후 <b>후일 환급</b> → 공항 현장 현금 환급 불가. 세차장은 2GIS "автомойка" 검색(300~500솜)</span></td>
       </tr>
       <tr>
-        <td data-label="상태"><span class="badge b-todo">확인 필요</span></td>
+        <td data-label="상태"><label class="chkbox"><input type="checkbox" class="taskchk" data-id="t4"><span class="badge b-todo">확인 필요</span></label></td>
         <td data-label="항목"><b>SNEG 디너</b></td>
         <td data-label="내용">Day 7 저녁 특별 케이블카(18:30/20:30) 운행 여부 — 슈퍼바이저 연락 시 확인</td>
       </tr>
       <tr>
-        <td data-label="상태"><span class="badge b-todo">확인 필요</span></td>
+        <td data-label="상태"><label class="chkbox"><input type="checkbox" class="taskchk" data-id="t5"><span class="badge b-todo">확인 필요</span></label></td>
         <td data-label="항목"><b>숙소 주방</b></td>
         <td data-label="내용">토소르 에어비앤비 <b>주방 · 망갈(화로)</b> 유무 — 셀프 쿠킹 메뉴 결정에 필요</td>
       </tr>
       <tr>
-        <td data-label="상태"><span class="badge b-crit">필수</span></td>
+        <td data-label="상태"><label class="chkbox"><input type="checkbox" class="taskchk" data-id="t6"><span class="badge b-crit">필수</span></label></td>
         <td data-label="항목"><b>국제운전면허증</b></td>
         <td data-label="내용">미발급 시 렌트·운전 불가 — 1968 비엔나 협약식, 경찰서·면허시험장 당일 발급</td>
       </tr>
@@ -635,6 +683,8 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
     <span class="badge b-acc">시차</span> 카자흐 한국−4h · 키르기스 한국−3h (두 나라 간 1시간 차) &nbsp;
     <span class="badge b-acc">일출·일몰</span> 알마티 05:30/18:10 · 비슈케크 06:30/19:25 · 이식쿨 06:25/19:15
   </p>
+
+  <div id="tripStatus" class="alert a-info" style="display:none;margin-top:0;margin-bottom:16px"></div>
 
   <div class="day">
     <div class="day-head"><span class="day-tag">DAY 1</span><span class="day-date">9/3 (목)</span><span class="badge b-low">인천 → 알마티</span></div>
@@ -1023,7 +1073,7 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
   <p class="sec-desc">필요할 때 펼쳐 보세요 — 명소·미식·쇼핑·준비물 상세</p>
 </div>
 <!-- ============ PLACES ============ -->
-<details class="acc" id="places">
+<details class="acc" id="places" open>
   <summary>
     <span class="acc-num">09</span>
     <span class="acc-title">이식쿨 호수 명소</span>
@@ -1365,6 +1415,101 @@ footer .t{font-weight:800;color:var(--ink);font-size:14px;margin-bottom:6px}
   if(btn) btn.addEventListener('click',fetchRates);
 
   paintLive(); calc(); fetchRates();
+})();
+</script>
+
+<button id="toTop" aria-label="맨 위로" title="맨 위로">↑</button>
+
+<script>
+/* ===== UX 개선: 스크롤스파이 · 맨 위로 · 오늘 일정 · 준비 체크리스트 ===== */
+(function(){
+  /* ---- 스크롤스파이 + 맨 위로 ---- */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav a'));
+  var sections = navLinks.map(function(a){
+    var id=(a.getAttribute('href')||'').slice(1);
+    return {a:a, el:document.getElementById(id)};
+  }).filter(function(s){return s.el;});
+  var toTop=document.getElementById('toTop');
+
+  function onScroll(){
+    var cur=null;
+    sections.forEach(function(s){
+      if(s.el.getBoundingClientRect().top<=140) cur=s;
+    });
+    // 페이지 하단에 도달하면 마지막 섹션을 활성화 (하단에 몰린 참고자료 대응)
+    if(window.innerHeight+window.scrollY >= document.body.scrollHeight-2){
+      cur=sections[sections.length-1];
+    }
+    navLinks.forEach(function(a){a.classList.remove('active');});
+    if(cur) cur.a.classList.add('active');
+    if(toTop){ toTop.classList.toggle('show', window.scrollY>500); }
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  onScroll();
+  if(toTop) toTop.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  /* ---- 오늘 일정 강조 / 출발 카운트다운 ---- */
+  var banner=document.getElementById('tripStatus');
+  if(banner){
+    var start=new Date(2026,8,3), end=new Date(2026,8,12); // 9월=month 8
+    var n=new Date(), today=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+    var DAY=86400000;
+    if(today.getTime()<start.getTime()){
+      var d=Math.round((start-today)/DAY);
+      banner.style.display='';
+      banner.innerHTML='<h4>✈️ 출발 D-'+d+'</h4><ul><li>2026.09.03 출발까지 <b>'+d+'일</b> 남았습니다 · 위 <b>준비 진행률</b>에서 남은 항목을 점검하세요.</li></ul>';
+    } else if(today.getTime()<=end.getTime()){
+      var cards=Array.prototype.slice.call(document.querySelectorAll('.day')), hit=null, num=0;
+      cards.forEach(function(c,i){
+        var t=c.querySelector('.day-date'); if(!t) return;
+        var m=t.textContent.match(/(\d+)\/(\d+)/); if(!m) return;
+        var cd=new Date(2026,+m[1]-1,+m[2]);
+        if(cd.getTime()===today.getTime()){ hit=c; num=i+1; }
+      });
+      if(hit){
+        hit.classList.add('today');
+        var head=hit.querySelector('.day-head');
+        if(head){ var f=document.createElement('span'); f.className='today-flag'; f.textContent='오늘'; head.insertBefore(f, head.firstChild); }
+        banner.style.display='';
+        banner.innerHTML='<h4>📍 오늘은 Day '+num+'</h4><ul><li>아래 보라색으로 강조된 카드가 <b>오늘 일정</b>입니다.</li></ul>';
+      }
+    } else {
+      banner.style.display='';
+      banner.innerHTML='<h4>🏠 여행 완료</h4><ul><li>수고하셨어요 — 즐거운 여행이 되셨길 바랍니다.</li></ul>';
+    }
+  }
+
+  /* ---- 준비 체크리스트 (방문 간 저장) ---- */
+  var chks=Array.prototype.slice.call(document.querySelectorAll('.taskchk'));
+  if(chks.length){
+    var KEY='kzt_prep_tasks_v1';
+    var pct=document.getElementById('taskPct'),
+        fill=document.getElementById('tpFill'),
+        cnt=document.getElementById('taskCount');
+    function load(){ try{ return JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ return {}; } }
+    function save(s){ try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(e){} }
+    function refresh(){
+      var done=0;
+      chks.forEach(function(c){
+        var tr=c.closest('tr');
+        if(c.checked){ done++; if(tr) tr.classList.add('done-row'); }
+        else if(tr){ tr.classList.remove('done-row'); }
+      });
+      var total=chks.length, p=Math.round(done/total*100);
+      if(pct) pct.textContent=p+'%';
+      if(fill) fill.style.width=p+'%';
+      if(cnt) cnt.textContent=done+' / '+total+' 완료';
+    }
+    var st=load();
+    chks.forEach(function(c){
+      if(st[c.getAttribute('data-id')]) c.checked=true;
+      c.addEventListener('change',function(){
+        var s=load(); s[c.getAttribute('data-id')]=c.checked; save(s); refresh();
+      });
+    });
+    refresh();
+  }
 })();
 </script>
 </body>
