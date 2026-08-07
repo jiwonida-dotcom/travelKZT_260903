@@ -35,7 +35,7 @@
   --shell-r:34px;   /* 앱 셸 = 헤더 공통 모서리 반경 */
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;overflow-x:hidden}
+html{scroll-behavior:smooth}
 body{
   font-family:'Pretendard','Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
   background:var(--bg);color:var(--ink);
@@ -509,7 +509,7 @@ tr.done-row td[data-label="항목"] b{text-decoration:line-through}
 }
 
 /* ===== 디자인 고도화: 핀테크 SaaS (바이올렛·핑크) ===== */
-body{letter-spacing:-.003em;padding:0;overflow-x:hidden;max-width:100vw}
+body{letter-spacing:-.003em;padding:0;overflow-x:clip;max-width:100vw}
 ::selection{background:var(--accent-soft);color:var(--accent-2)}
 a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{
   outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
